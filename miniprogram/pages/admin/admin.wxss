@@ -8,4 +8,4 @@
 .ainfo { flex:1; }
 .anm { font-size:28rpx; font-weight:bold; }
 .ade { font-size:22rpx; color:#6b7280; margin-top:6rpx; }
-.aedit { font-size:24rpx; color:#06ad56; font-weight:bold; }
+.aedit { font-size:24rpx; color:#e84d7a; font-weight:bold; }

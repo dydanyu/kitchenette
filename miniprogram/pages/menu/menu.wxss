@@ -8,7 +8,7 @@
 .cats { width:172rpx; background:#f3f4f6; }
 .cat { padding:30rpx 8rpx; text-align:center; font-size:24rpx; color:#6b7280; position:relative; }
 .cat.on { background:#fff; color:#1f2937; font-weight:bold; }
-.cat.on::before { content:''; position:absolute; left:0; top:28rpx; bottom:28rpx; width:6rpx; background:#07c160; border-radius:4rpx; }
+.cat.on::before { content:''; position:absolute; left:0; top:28rpx; bottom:28rpx; width:6rpx; background:#ff5c8a; border-radius:4rpx; }
 .cat-emoji { font-size:32rpx; }
 .dishlist { flex:1; padding:8rpx 24rpx; padding-bottom:calc(140rpx + env(safe-area-inset-bottom)); }
 .dishlist.has-cart { padding-bottom:calc(210rpx + env(safe-area-inset-bottom)); }
@@ -19,10 +19,10 @@
 .ddesc { font-size:22rpx; color:#6b7280; margin:6rpx 0; }
 .dbottom { display:flex; justify-content:space-between; align-items:flex-end; margin-top:auto; }
 .dmeta { font-size:22rpx; color:#6b7280; }
-.add { width:52rpx; height:52rpx; border-radius:50%; background:#07c160; color:#fff; font-size:40rpx; text-align:center; line-height:48rpx; }
+.add { width:52rpx; height:52rpx; border-radius:50%; background:#ff5c8a; color:#fff; font-size:40rpx; text-align:center; line-height:48rpx; }
 .stepper { display:flex; align-items:center; gap:18rpx; }
-.sbtn { width:48rpx; height:48rpx; border-radius:50%; text-align:center; line-height:44rpx; font-size:34rpx; border:1rpx solid #07c160; color:#07c160; }
-.sbtn.on { background:#07c160; color:#fff; border-color:#07c160; }
+.sbtn { width:48rpx; height:48rpx; border-radius:50%; text-align:center; line-height:44rpx; font-size:34rpx; border:1rpx solid #ff5c8a; color:#ff5c8a; }
+.sbtn.on { background:#ff5c8a; color:#fff; border-color:#ff5c8a; }
 .sqty { font-size:28rpx; font-weight:bold; min-width:32rpx; text-align:center; }
 .cartbar { position:fixed; left:24rpx; right:24rpx; bottom:calc(120rpx + env(safe-area-inset-bottom)); background:#2b2f36; color:#fff; border-radius:48rpx; padding:20rpx 32rpx; display:flex; justify-content:space-between; align-items:center; font-size:26rpx; }
-.cartbar .go { background:#07c160; padding:14rpx 36rpx; border-radius:36rpx; font-weight:bold; }
+.cartbar .go { background:#ff5c8a; padding:14rpx 36rpx; border-radius:36rpx; font-weight:bold; }

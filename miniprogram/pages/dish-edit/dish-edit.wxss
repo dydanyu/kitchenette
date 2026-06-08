@@ -57,9 +57,9 @@
   border: 1rpx solid #eef0f3;
 }
 .chip.on {
-  background: #07c160;
+  background: #ff5c8a;
   color: #fff;
-  border-color: #07c160;
+  border-color: #ff5c8a;
 }
 .save {
   text-align: center;

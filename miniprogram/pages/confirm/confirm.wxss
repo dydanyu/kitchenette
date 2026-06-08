@@ -2,7 +2,7 @@
 .list { padding:16rpx 24rpx; margin-bottom:24rpx; }
 .oitem { display:flex; justify-content:space-between; align-items:center; padding:16rpx 0; font-size:28rpx; }
 .stepper { display:flex; align-items:center; gap:24rpx; }
-.sbtn { width:52rpx; height:52rpx; border:1rpx solid #07c160; color:#07c160; border-radius:50%; text-align:center; line-height:50rpx; }
+.sbtn { width:52rpx; height:52rpx; border:1rpx solid #ff5c8a; color:#ff5c8a; border-radius:50%; text-align:center; line-height:50rpx; }
 .q { font-size:28rpx; font-weight:bold; }
 .field { margin-bottom:24rpx; }
 .label { font-size:26rpx; font-weight:bold; margin-bottom:12rpx; }

@@ -9,7 +9,7 @@
   align-items: center; justify-content: center; gap: 4rpx;
   font-size: 22rpx; color: #9aa3ad;
 }
-.tab.on { color: #07c160; }
+.tab.on { color: #ff5c8a; }
 .ic { font-size: 40rpx; line-height: 1; position: relative; }
 .reddot {
   position: absolute; top: -8rpx; right: -18rpx;

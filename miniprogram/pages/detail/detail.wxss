@@ -1,4 +1,4 @@
-.hero { width:100%; display:block; background:#a0e7c0; }
+.hero { width:100%; display:block; background:#ffd6e3; }
 .sheet { background:#fff; border-radius:32rpx 32rpx 0 0; margin-top:-32rpx; padding:32rpx; position:relative; }
 .h2 { font-size:40rpx; font-weight:800; }
 .row { color:#6b7280; font-size:26rpx; margin:16rpx 0; }
