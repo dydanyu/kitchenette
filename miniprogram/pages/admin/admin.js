@@ -3,7 +3,11 @@ const { call } = require('../../utils/cloud');
 Page({
   data: { tab: 'dishes', dishes: [], cats: [], tags: [] },
   onShow() {
-    if (!app.globalData.isAdmin) { wx.showToast({ title: '无权限', icon: 'none' }); wx.navigateBack(); return; }
+    if (!app.globalData.isAdmin) { wx.showToast({ title: '无权限', icon: 'none' }); wx.switchTab({ url: '/pages/menu/menu' }); return; }
+    if (typeof this.getTabBar === 'function' && this.getTabBar()) {
+      this.getTabBar().setData({ selected: 2 });
+      this.getTabBar().refresh();
+    }
     this.load();
   },
   switchTab(e) { this.setData({ tab: e.currentTarget.dataset.tab }); },

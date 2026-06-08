@@ -1,0 +1,11 @@
+<view class="tabbar">
+  <view wx:for="{{list}}" wx:key="text"
+        class="tab {{selected===index?'on':''}}"
+        data-path="{{item.pagePath}}" bindtap="switchTab">
+    <view class="ic">
+      {{item.icon}}
+      <text wx:if="{{item.pagePath==='/pages/admin/admin' && pending>0}}" class="reddot">{{pending}}</text>
+    </view>
+    <view class="tx">{{item.text}}</view>
+  </view>
+</view>

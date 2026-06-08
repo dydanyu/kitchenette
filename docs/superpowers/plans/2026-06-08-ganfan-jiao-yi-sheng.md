@@ -1,4 +1,4 @@
-# 干饭叫一声 · 家庭点菜小程序 Implementation Plan
+# 鱼鳞の厨房 · 家庭点菜小程序 Implementation Plan
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
@@ -1019,7 +1019,7 @@ App({
   "window": {
     "navigationBarBackgroundColor": "#07c160",
     "navigationBarTextStyle": "white",
-    "navigationBarTitleText": "干饭叫一声"
+    "navigationBarTitleText": "鱼鳞の厨房"
   },
   "tabBar": {
     "color": "#9aa3ad",
@@ -1115,7 +1115,7 @@ git commit -m "feat: add mini program entry, cloud init and global theme"
 - [ ] **Step 1: menu.json**
 
 ```json
-{ "navigationBarTitleText": "干饭叫一声", "enablePullDownRefresh": true }
+{ "navigationBarTitleText": "鱼鳞の厨房", "enablePullDownRefresh": true }
 ```
 
 - [ ] **Step 2: menu.js（拉分类+菜品、分类筛选、加入购物车、转发）**
@@ -1196,7 +1196,7 @@ Page({
   },
 
   onShareAppMessage() {
-    return { title: "快来家里点菜！干饭叫一声 🍳", path: "/pages/menu/menu" };
+    return { title: "快来家里点菜！鱼鳞の厨房 🍳", path: "/pages/menu/menu" };
   },
 });
 ```

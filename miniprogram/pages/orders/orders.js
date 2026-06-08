@@ -1,7 +1,13 @@
 const STATUS_TEXT = { pending: '待出餐', served: '已出餐' };
 Page({
   data: { orders: [] },
-  onShow() { this.load(); },
+  onShow() {
+    if (typeof this.getTabBar === 'function' && this.getTabBar()) {
+      this.getTabBar().setData({ selected: 1 });
+      this.getTabBar().refresh();
+    }
+    this.load();
+  },
   onPullDownRefresh() { this.load().then(() => wx.stopPullDownRefresh()); },
   async load() {
     const db = wx.cloud.database();

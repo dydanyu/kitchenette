@@ -13,14 +13,16 @@
   "window": {
     "navigationBarBackgroundColor": "#07c160",
     "navigationBarTextStyle": "white",
-    "navigationBarTitleText": "干饭叫一声"
+    "navigationBarTitleText": "鱼鳞の厨房"
   },
   "tabBar": {
+    "custom": true,
     "color": "#9aa3ad",
     "selectedColor": "#07c160",
     "list": [
       { "pagePath": "pages/menu/menu", "text": "菜单" },
-      { "pagePath": "pages/orders/orders", "text": "我的订单" }
+      { "pagePath": "pages/orders/orders", "text": "我的订单" },
+      { "pagePath": "pages/admin/admin", "text": "厨房管理" }
     ]
   },
   "sitemapLocation": "sitemap.json"

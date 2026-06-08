@@ -1,518 +1,1397 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>干饭叫一声 · UI 稿</title>
-<style>
-  :root{
-    --bg:#f3f4f6; --card:#ffffff; --ink:#1f2937; --sub:#6b7280;
-    --line:#eef0f3; --brand:#07c160; --brand-d:#06ad56; --warn:#ff9f0a;
-    --star:#ffb400; --tag:#eafaf0; --tag-ink:#06ad56; --danger:#ff4d4f;
-    --shadow:0 8px 24px rgba(17,24,39,.08);
-  }
-  *{box-sizing:border-box;-webkit-font-smoothing:antialiased}
-  body{margin:0;background:linear-gradient(180deg,#eef1f5,#e7ebf0);
-    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;
-    color:var(--ink);padding:32px 16px 64px}
-  h1.title{text-align:center;font-size:22px;margin:0 0 4px}
-  p.sub{text-align:center;color:var(--sub);margin:0 0 28px;font-size:13px}
-  .grid{display:flex;flex-wrap:wrap;gap:34px 28px;justify-content:center;align-items:flex-start}
-  .phone{width:320px;background:var(--bg);border-radius:38px;padding:10px;
-    box-shadow:var(--shadow);border:1px solid #dfe3e8}
-  .screen{background:var(--bg);border-radius:30px;overflow:hidden;height:660px;
-    display:flex;flex-direction:column;position:relative}
-  .statusbar{height:30px;display:flex;align-items:center;justify-content:space-between;
-    padding:0 18px;font-size:12px;font-weight:600;color:#111;background:transparent;flex:0 0 auto}
-  .capsule{position:absolute;top:6px;right:14px;width:78px;height:26px;border-radius:14px;
-    background:rgba(0,0,0,.05);border:1px solid rgba(0,0,0,.06);display:flex;
-    align-items:center;justify-content:space-around;z-index:5}
-  .capsule span{width:6px;height:6px;border-radius:50%;background:#333}
-  .capsule .dots{display:flex;gap:5px}
-  .navbar{flex:0 0 auto;padding:6px 16px 12px;background:var(--bg)}
-  .navbar .nav-title{font-size:18px;font-weight:700}
-  .body{flex:1;overflow:auto;padding:0 14px 14px}
-  .screen-label{position:absolute;bottom:8px;left:0;right:0;text-align:center;
-    font-size:11px;color:#9aa3ad;letter-spacing:.5px}
-  .caption{text-align:center;margin-top:10px;font-size:13px;color:#4b5563;font-weight:600}
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>鱼鳞の厨房 · UI 稿</title>
+    <style>
+      :root {
+        --bg: #f3f4f6;
+        --card: #ffffff;
+        --ink: #1f2937;
+        --sub: #6b7280;
+        --line: #eef0f3;
+        --brand: #07c160;
+        --brand-d: #06ad56;
+        --warn: #ff9f0a;
+        --star: #ffb400;
+        --tag: #eafaf0;
+        --tag-ink: #06ad56;
+        --danger: #ff4d4f;
+        --shadow: 0 8px 24px rgba(17, 24, 39, 0.08);
+      }
+      * {
+        box-sizing: border-box;
+        -webkit-font-smoothing: antialiased;
+      }
+      body {
+        margin: 0;
+        background: linear-gradient(180deg, #eef1f5, #e7ebf0);
+        font-family:
+          -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei",
+          sans-serif;
+        color: var(--ink);
+        padding: 32px 16px 64px;
+      }
+      h1.title {
+        text-align: center;
+        font-size: 22px;
+        margin: 0 0 4px;
+      }
+      p.sub {
+        text-align: center;
+        color: var(--sub);
+        margin: 0 0 28px;
+        font-size: 13px;
+      }
+      .grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 34px 28px;
+        justify-content: center;
+        align-items: flex-start;
+      }
+      .phone {
+        width: 320px;
+        background: var(--bg);
+        border-radius: 38px;
+        padding: 10px;
+        box-shadow: var(--shadow);
+        border: 1px solid #dfe3e8;
+      }
+      .screen {
+        background: var(--bg);
+        border-radius: 30px;
+        overflow: hidden;
+        height: 660px;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+      }
+      .statusbar {
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 18px;
+        font-size: 12px;
+        font-weight: 600;
+        color: #111;
+        background: transparent;
+        flex: 0 0 auto;
+      }
+      .capsule {
+        position: absolute;
+        top: 6px;
+        right: 14px;
+        width: 78px;
+        height: 26px;
+        border-radius: 14px;
+        background: rgba(0, 0, 0, 0.05);
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        z-index: 5;
+      }
+      .capsule span {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #333;
+      }
+      .capsule .dots {
+        display: flex;
+        gap: 5px;
+      }
+      .navbar {
+        flex: 0 0 auto;
+        padding: 6px 16px 12px;
+        background: var(--bg);
+      }
+      .navbar .nav-title {
+        font-size: 18px;
+        font-weight: 700;
+      }
+      .body {
+        flex: 1;
+        overflow: auto;
+        padding: 0 14px 14px;
+      }
+      .screen-label {
+        position: absolute;
+        bottom: 8px;
+        left: 0;
+        right: 0;
+        text-align: center;
+        font-size: 11px;
+        color: #9aa3ad;
+        letter-spacing: 0.5px;
+      }
+      .caption {
+        text-align: center;
+        margin-top: 10px;
+        font-size: 13px;
+        color: #4b5563;
+        font-weight: 600;
+      }
 
-  /* search */
-  .search{display:flex;align-items:center;gap:8px;background:#fff;border-radius:20px;
-    padding:9px 14px;color:#9aa3ad;font-size:13px;box-shadow:0 1px 2px rgba(0,0,0,.03);margin-bottom:12px}
-  /* chef tag chips */
-  .chips{display:flex;gap:8px;overflow:auto;padding-bottom:10px;margin-bottom:4px}
-  .chip{flex:0 0 auto;padding:7px 14px;border-radius:16px;background:#fff;color:var(--sub);
-    font-size:13px;border:1px solid var(--line)}
-  .chip.on{background:var(--brand);color:#fff;border-color:var(--brand);font-weight:600}
-  /* dish card */
-  .dish{background:#fff;border-radius:16px;overflow:hidden;margin-bottom:12px;
-    box-shadow:0 2px 8px rgba(17,24,39,.04)}
-  .dish .pic{height:120px;background:linear-gradient(135deg,#ffd9a0,#ff9e7d);position:relative}
-  .dish .pic.b{background:linear-gradient(135deg,#a0e7c0,#5ad1a0)}
-  .dish .pic.c{background:linear-gradient(135deg,#c3b3ff,#8f7bff)}
-  .dish .pic.d{background:linear-gradient(135deg,#ffd0e0,#ff8fb3)}
-  .pic .emoji{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:46px}
-  .dish .info{padding:10px 12px}
-  .dish .name{font-size:15px;font-weight:700;display:flex;justify-content:space-between;align-items:center}
-  .dish .desc{font-size:12px;color:var(--sub);margin:4px 0 8px;line-height:1.5}
-  .dtags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
-  .dtag{font-size:11px;padding:2px 8px;border-radius:10px;background:var(--tag);color:var(--tag-ink)}
-  .meta{display:flex;align-items:center;justify-content:space-between}
-  .meta .left{font-size:12px;color:var(--sub);display:flex;gap:12px;align-items:center}
-  .stars{color:var(--star);font-size:12px}
-  .addbtn{width:30px;height:30px;border-radius:50%;background:var(--brand);color:#fff;
-    border:none;font-size:20px;line-height:1;display:flex;align-items:center;justify-content:center}
-  .stepper{display:flex;align-items:center;gap:10px}
-  .stepper button{width:26px;height:26px;border-radius:50%;border:1px solid var(--brand);
-    background:#fff;color:var(--brand);font-size:16px}
-  .stepper .q{font-size:14px;font-weight:700;min-width:14px;text-align:center}
+      /* search */
+      .search {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: #fff;
+        border-radius: 20px;
+        padding: 9px 14px;
+        color: #9aa3ad;
+        font-size: 13px;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+        margin-bottom: 12px;
+      }
+      /* chef tag chips */
+      .chips {
+        display: flex;
+        gap: 8px;
+        overflow: auto;
+        padding-bottom: 10px;
+        margin-bottom: 4px;
+      }
+      .chip {
+        flex: 0 0 auto;
+        padding: 7px 14px;
+        border-radius: 16px;
+        background: #fff;
+        color: var(--sub);
+        font-size: 13px;
+        border: 1px solid var(--line);
+      }
+      .chip.on {
+        background: var(--brand);
+        color: #fff;
+        border-color: var(--brand);
+        font-weight: 600;
+      }
+      /* dish card */
+      .dish {
+        background: #fff;
+        border-radius: 16px;
+        overflow: hidden;
+        margin-bottom: 12px;
+        box-shadow: 0 2px 8px rgba(17, 24, 39, 0.04);
+      }
+      .dish .pic {
+        height: 120px;
+        background: linear-gradient(135deg, #ffd9a0, #ff9e7d);
+        position: relative;
+      }
+      .dish .pic.b {
+        background: linear-gradient(135deg, #a0e7c0, #5ad1a0);
+      }
+      .dish .pic.c {
+        background: linear-gradient(135deg, #c3b3ff, #8f7bff);
+      }
+      .dish .pic.d {
+        background: linear-gradient(135deg, #ffd0e0, #ff8fb3);
+      }
+      .pic .emoji {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 46px;
+      }
+      .dish .info {
+        padding: 10px 12px;
+      }
+      .dish .name {
+        font-size: 15px;
+        font-weight: 700;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .dish .desc {
+        font-size: 12px;
+        color: var(--sub);
+        margin: 4px 0 8px;
+        line-height: 1.5;
+      }
+      .dtags {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+        margin-bottom: 8px;
+      }
+      .dtag {
+        font-size: 11px;
+        padding: 2px 8px;
+        border-radius: 10px;
+        background: var(--tag);
+        color: var(--tag-ink);
+      }
+      .meta {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .meta .left {
+        font-size: 12px;
+        color: var(--sub);
+        display: flex;
+        gap: 12px;
+        align-items: center;
+      }
+      .stars {
+        color: var(--star);
+        font-size: 12px;
+      }
+      .addbtn {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: var(--brand);
+        color: #fff;
+        border: none;
+        font-size: 20px;
+        line-height: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .stepper {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .stepper button {
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        border: 1px solid var(--brand);
+        background: #fff;
+        color: var(--brand);
+        font-size: 16px;
+      }
+      .stepper .q {
+        font-size: 14px;
+        font-weight: 700;
+        min-width: 14px;
+        text-align: center;
+      }
 
-  /* split menu: left category + right dishes */
-  .menu-split{flex:1;display:flex;overflow:hidden;background:#fff}
-  .cats{width:86px;flex:0 0 auto;background:#f3f4f6;overflow:auto}
-  .cat{padding:15px 6px;font-size:12px;text-align:center;color:var(--sub);position:relative;line-height:1.3}
-  .cat.on{background:#fff;color:var(--ink);font-weight:700}
-  .cat.on::before{content:"";position:absolute;left:0;top:14px;bottom:14px;width:3px;background:var(--brand);border-radius:2px}
-  .dishlist{flex:1;overflow:auto;padding:4px 12px 70px}
-  .drow{display:flex;gap:10px;padding:12px 0;border-bottom:1px solid var(--line)}
-  .drow:last-child{border-bottom:none}
-  .dthumb{width:62px;height:62px;border-radius:10px;flex:0 0 auto;display:flex;
-    align-items:center;justify-content:center;font-size:30px;background:linear-gradient(135deg,#ffd9a0,#ff9e7d)}
-  .dmain{flex:1;min-width:0;display:flex;flex-direction:column}
-  .dname{font-size:14px;font-weight:700}
-  .ddesc{font-size:11px;color:var(--sub);margin:3px 0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-  .drow .dtags{margin:2px 0 0}
-  .drow .dtag{font-size:10px;padding:1px 6px}
-  .dbottom{display:flex;justify-content:space-between;align-items:flex-end;margin-top:auto;padding-top:6px}
-  .dbottom .left{font-size:11px;color:var(--sub);display:flex;flex-direction:column;gap:2px}
-  .dbottom .stars{font-size:11px}
-  .addbtn.sm{width:26px;height:26px;font-size:18px}
-  .stepper.sm button{width:24px;height:24px;font-size:15px}
-  .stepper.sm .q{font-size:13px}
-  /* tabbar */
-  .tabbar{flex:0 0 auto;height:56px;background:#fff;border-top:1px solid var(--line);
-    display:flex;align-items:center;justify-content:space-around;padding-bottom:4px}
-  .tab{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11px;color:#9aa3ad}
-  .tab.on{color:var(--brand)}
-  .tab .ic{font-size:20px}
-  .badge{position:absolute;top:-4px;right:-10px;background:var(--danger);color:#fff;
-    font-size:10px;min-width:16px;height:16px;border-radius:8px;display:flex;
-    align-items:center;justify-content:center;padding:0 4px}
-  .tab .ic-wrap{position:relative}
+      /* split menu: left category + right dishes */
+      .menu-split {
+        flex: 1;
+        display: flex;
+        overflow: hidden;
+        background: #fff;
+      }
+      .cats {
+        width: 86px;
+        flex: 0 0 auto;
+        background: #f3f4f6;
+        overflow: auto;
+      }
+      .cat {
+        padding: 15px 6px;
+        font-size: 12px;
+        text-align: center;
+        color: var(--sub);
+        position: relative;
+        line-height: 1.3;
+      }
+      .cat.on {
+        background: #fff;
+        color: var(--ink);
+        font-weight: 700;
+      }
+      .cat.on::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 14px;
+        bottom: 14px;
+        width: 3px;
+        background: var(--brand);
+        border-radius: 2px;
+      }
+      .dishlist {
+        flex: 1;
+        overflow: auto;
+        padding: 4px 12px 70px;
+      }
+      .drow {
+        display: flex;
+        gap: 10px;
+        padding: 12px 0;
+        border-bottom: 1px solid var(--line);
+      }
+      .drow:last-child {
+        border-bottom: none;
+      }
+      .dthumb {
+        width: 62px;
+        height: 62px;
+        border-radius: 10px;
+        flex: 0 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 30px;
+        background: linear-gradient(135deg, #ffd9a0, #ff9e7d);
+      }
+      .dmain {
+        flex: 1;
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+      }
+      .dname {
+        font-size: 14px;
+        font-weight: 700;
+      }
+      .ddesc {
+        font-size: 11px;
+        color: var(--sub);
+        margin: 3px 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .drow .dtags {
+        margin: 2px 0 0;
+      }
+      .drow .dtag {
+        font-size: 10px;
+        padding: 1px 6px;
+      }
+      .dbottom {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-top: auto;
+        padding-top: 6px;
+      }
+      .dbottom .left {
+        font-size: 11px;
+        color: var(--sub);
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+      .dbottom .stars {
+        font-size: 11px;
+      }
+      .addbtn.sm {
+        width: 26px;
+        height: 26px;
+        font-size: 18px;
+      }
+      .stepper.sm button {
+        width: 24px;
+        height: 24px;
+        font-size: 15px;
+      }
+      .stepper.sm .q {
+        font-size: 13px;
+      }
+      /* tabbar */
+      .tabbar {
+        flex: 0 0 auto;
+        height: 56px;
+        background: #fff;
+        border-top: 1px solid var(--line);
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        padding-bottom: 4px;
+      }
+      .tab {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2px;
+        font-size: 11px;
+        color: #9aa3ad;
+      }
+      .tab.on {
+        color: var(--brand);
+      }
+      .tab .ic {
+        font-size: 20px;
+      }
+      .badge {
+        position: absolute;
+        top: -4px;
+        right: -10px;
+        background: var(--danger);
+        color: #fff;
+        font-size: 10px;
+        min-width: 16px;
+        height: 16px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 4px;
+      }
+      .tab .ic-wrap {
+        position: relative;
+      }
 
-  /* floating cart */
-  .cartbar{position:absolute;left:14px;right:14px;bottom:68px;background:#2b2f36;color:#fff;
-    border-radius:26px;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;
-    box-shadow:0 6px 18px rgba(0,0,0,.25)}
-  .cartbar .l{display:flex;align-items:center;gap:10px;font-size:13px}
-  .cart-ic{width:40px;height:40px;border-radius:50%;background:var(--brand);display:flex;
-    align-items:center;justify-content:center;font-size:20px;position:relative}
-  .cartbar .go{background:var(--brand);border:none;color:#fff;padding:8px 18px;border-radius:18px;font-weight:700;font-size:13px}
+      /* floating cart */
+      .cartbar {
+        position: absolute;
+        left: 14px;
+        right: 14px;
+        bottom: 68px;
+        background: #2b2f36;
+        color: #fff;
+        border-radius: 26px;
+        padding: 10px 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+      }
+      .cartbar .l {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 13px;
+      }
+      .cart-ic {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: var(--brand);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        position: relative;
+      }
+      .cartbar .go {
+        background: var(--brand);
+        border: none;
+        color: #fff;
+        padding: 8px 18px;
+        border-radius: 18px;
+        font-weight: 700;
+        font-size: 13px;
+      }
 
-  /* detail */
-  .hero{height:200px;background:linear-gradient(135deg,#a0e7c0,#5ad1a0);display:flex;
-    align-items:center;justify-content:center;font-size:70px}
-  .sheet{background:#fff;border-radius:20px 20px 0 0;margin-top:-20px;padding:16px;flex:1}
-  .h2{font-size:20px;font-weight:800;margin:0}
-  .row{display:flex;gap:14px;align-items:center;color:var(--sub);font-size:13px;margin:10px 0}
-  .divider{height:1px;background:var(--line);margin:14px 0}
-  .sec-t{font-size:14px;font-weight:700;margin:0 0 8px}
-  .review{display:flex;gap:10px;margin-bottom:12px}
-  .avatar{width:34px;height:34px;border-radius:50%;background:#dfe7ee;flex:0 0 auto;
-    display:flex;align-items:center;justify-content:center;font-size:16px}
-  .review .rc{flex:1}
-  .review .rn{font-size:13px;font-weight:600}
-  .review .rt{font-size:12px;color:var(--sub);margin-top:3px;line-height:1.5}
+      /* detail */
+      .hero {
+        height: 200px;
+        background: linear-gradient(135deg, #a0e7c0, #5ad1a0);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 70px;
+      }
+      .sheet {
+        background: #fff;
+        border-radius: 20px 20px 0 0;
+        margin-top: -20px;
+        padding: 16px;
+        flex: 1;
+      }
+      .h2 {
+        font-size: 20px;
+        font-weight: 800;
+        margin: 0;
+      }
+      .row {
+        display: flex;
+        gap: 14px;
+        align-items: center;
+        color: var(--sub);
+        font-size: 13px;
+        margin: 10px 0;
+      }
+      .divider {
+        height: 1px;
+        background: var(--line);
+        margin: 14px 0;
+      }
+      .sec-t {
+        font-size: 14px;
+        font-weight: 700;
+        margin: 0 0 8px;
+      }
+      .review {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 12px;
+      }
+      .avatar {
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        background: #dfe7ee;
+        flex: 0 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+      }
+      .review .rc {
+        flex: 1;
+      }
+      .review .rn {
+        font-size: 13px;
+        font-weight: 600;
+      }
+      .review .rt {
+        font-size: 12px;
+        color: var(--sub);
+        margin-top: 3px;
+        line-height: 1.5;
+      }
 
-  /* order list */
-  .order{background:#fff;border-radius:16px;padding:14px;margin-bottom:12px;box-shadow:0 2px 8px rgba(17,24,39,.04)}
-  .order .oh{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
-  .order .who{font-size:14px;font-weight:700}
-  .pill{font-size:11px;padding:3px 9px;border-radius:10px}
-  .pill.new{background:#fff1e6;color:#d97706}
-  .pill.done{background:var(--tag);color:var(--tag-ink)}
-  .oitem{display:flex;justify-content:space-between;font-size:13px;color:#374151;padding:3px 0}
-  .ofoot{display:flex;justify-content:space-between;align-items:center;margin-top:10px;
-    padding-top:10px;border-top:1px dashed var(--line);font-size:12px;color:var(--sub)}
-  .btn{background:var(--brand);color:#fff;border:none;border-radius:14px;padding:7px 14px;font-size:12px;font-weight:600}
-  .btn.ghost{background:#fff;color:var(--brand);border:1px solid var(--brand)}
+      /* order list */
+      .order {
+        background: #fff;
+        border-radius: 16px;
+        padding: 14px;
+        margin-bottom: 12px;
+        box-shadow: 0 2px 8px rgba(17, 24, 39, 0.04);
+      }
+      .order .oh {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 8px;
+      }
+      .order .who {
+        font-size: 14px;
+        font-weight: 700;
+      }
+      .pill {
+        font-size: 11px;
+        padding: 3px 9px;
+        border-radius: 10px;
+      }
+      .pill.new {
+        background: #fff1e6;
+        color: #d97706;
+      }
+      .pill.done {
+        background: var(--tag);
+        color: var(--tag-ink);
+      }
+      .oitem {
+        display: flex;
+        justify-content: space-between;
+        font-size: 13px;
+        color: #374151;
+        padding: 3px 0;
+      }
+      .ofoot {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 10px;
+        padding-top: 10px;
+        border-top: 1px dashed var(--line);
+        font-size: 12px;
+        color: var(--sub);
+      }
+      .btn {
+        background: var(--brand);
+        color: #fff;
+        border: none;
+        border-radius: 14px;
+        padding: 7px 14px;
+        font-size: 12px;
+        font-weight: 600;
+      }
+      .btn.ghost {
+        background: #fff;
+        color: var(--brand);
+        border: 1px solid var(--brand);
+      }
 
-  /* rating screen */
-  .ratecard{background:#fff;border-radius:16px;padding:16px;margin-bottom:14px;text-align:center;box-shadow:0 2px 8px rgba(17,24,39,.04)}
-  .bigstars{font-size:30px;color:var(--star);letter-spacing:6px;margin:10px 0}
-  .bigstars .off{color:#e5e7eb}
-  .ta{width:100%;border:1px solid var(--line);border-radius:12px;padding:10px;font-size:13px;
-    color:#374151;min-height:60px;resize:none;background:#fafbfc}
-  .submit{width:100%;background:var(--brand);color:#fff;border:none;border-radius:22px;padding:13px;font-weight:700;font-size:15px;margin-top:8px}
+      /* rating screen */
+      .ratecard {
+        background: #fff;
+        border-radius: 16px;
+        padding: 16px;
+        margin-bottom: 14px;
+        text-align: center;
+        box-shadow: 0 2px 8px rgba(17, 24, 39, 0.04);
+      }
+      .bigstars {
+        font-size: 30px;
+        color: var(--star);
+        letter-spacing: 6px;
+        margin: 10px 0;
+      }
+      .bigstars .off {
+        color: #e5e7eb;
+      }
+      .ta {
+        width: 100%;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 10px;
+        font-size: 13px;
+        color: #374151;
+        min-height: 60px;
+        resize: none;
+        background: #fafbfc;
+      }
+      .submit {
+        width: 100%;
+        background: var(--brand);
+        color: #fff;
+        border: none;
+        border-radius: 22px;
+        padding: 13px;
+        font-weight: 700;
+        font-size: 15px;
+        margin-top: 8px;
+      }
 
-  /* admin form */
-  .field{margin-bottom:14px}
-  .field label{font-size:13px;font-weight:600;display:block;margin-bottom:6px}
-  .input{width:100%;border:1px solid var(--line);border-radius:12px;padding:11px 12px;font-size:13px;background:#fafbfc;color:#374151}
-  .uploader{height:96px;border:1.5px dashed #cfd6dd;border-radius:14px;display:flex;
-    flex-direction:column;align-items:center;justify-content:center;color:#9aa3ad;font-size:13px;gap:4px;background:#fafbfc}
-  .tagpick{display:flex;gap:8px;flex-wrap:wrap}
-  .tagpick .chip{font-size:12px}
-  .admin-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
-  .seg{display:flex;background:#e9edf1;border-radius:12px;padding:3px;margin-bottom:14px}
-  .seg div{flex:1;text-align:center;font-size:13px;padding:7px;border-radius:9px;color:var(--sub)}
-  .seg div.on{background:#fff;color:var(--ink);font-weight:700;box-shadow:0 1px 3px rgba(0,0,0,.06)}
-  .alist{display:flex;gap:10px;background:#fff;border-radius:14px;padding:10px;margin-bottom:10px;align-items:center}
-  .athumb{width:54px;height:54px;border-radius:10px;flex:0 0 auto;background:linear-gradient(135deg,#ffd9a0,#ff9e7d);display:flex;align-items:center;justify-content:center;font-size:26px}
-  .anm{font-size:14px;font-weight:700}
-  .ade{font-size:12px;color:var(--sub);margin-top:3px}
-  .aedit{font-size:12px;color:var(--brand);font-weight:600}
+      /* admin form */
+      .field {
+        margin-bottom: 14px;
+      }
+      .field label {
+        font-size: 13px;
+        font-weight: 600;
+        display: block;
+        margin-bottom: 6px;
+      }
+      .input {
+        width: 100%;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 11px 12px;
+        font-size: 13px;
+        background: #fafbfc;
+        color: #374151;
+      }
+      .uploader {
+        height: 96px;
+        border: 1.5px dashed #cfd6dd;
+        border-radius: 14px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: #9aa3ad;
+        font-size: 13px;
+        gap: 4px;
+        background: #fafbfc;
+      }
+      .tagpick {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      .tagpick .chip {
+        font-size: 12px;
+      }
+      .admin-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 12px;
+      }
+      .seg {
+        display: flex;
+        background: #e9edf1;
+        border-radius: 12px;
+        padding: 3px;
+        margin-bottom: 14px;
+      }
+      .seg div {
+        flex: 1;
+        text-align: center;
+        font-size: 13px;
+        padding: 7px;
+        border-radius: 9px;
+        color: var(--sub);
+      }
+      .seg div.on {
+        background: #fff;
+        color: var(--ink);
+        font-weight: 700;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+      }
+      .alist {
+        display: flex;
+        gap: 10px;
+        background: #fff;
+        border-radius: 14px;
+        padding: 10px;
+        margin-bottom: 10px;
+        align-items: center;
+      }
+      .athumb {
+        width: 54px;
+        height: 54px;
+        border-radius: 10px;
+        flex: 0 0 auto;
+        background: linear-gradient(135deg, #ffd9a0, #ff9e7d);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 26px;
+      }
+      .anm {
+        font-size: 14px;
+        font-weight: 700;
+      }
+      .ade {
+        font-size: 12px;
+        color: var(--sub);
+        margin-top: 3px;
+      }
+      .aedit {
+        font-size: 12px;
+        color: var(--brand);
+        font-weight: 600;
+      }
 
-  .legend{max-width:900px;margin:34px auto 0;background:#fff;border-radius:16px;padding:18px 22px;box-shadow:var(--shadow);font-size:13px;color:#374151;line-height:1.7}
-  .legend h3{margin:0 0 8px;font-size:15px}
-  .legend code{background:#f1f3f5;padding:1px 6px;border-radius:6px}
-</style>
-</head>
-<body>
-  <h1 class="title">🍳 干饭叫一声 · 家庭点菜小程序 UI 稿</h1>
-  <p class="sub">微信云开发 · 购物车式下单 · 下单后评分 · 厨师标签 · 可转发 — 低保真视觉稿（颜色/布局示意）</p>
+      .legend {
+        max-width: 900px;
+        margin: 34px auto 0;
+        background: #fff;
+        border-radius: 16px;
+        padding: 18px 22px;
+        box-shadow: var(--shadow);
+        font-size: 13px;
+        color: #374151;
+        line-height: 1.7;
+      }
+      .legend h3 {
+        margin: 0 0 8px;
+        font-size: 15px;
+      }
+      .legend code {
+        background: #f1f3f5;
+        padding: 1px 6px;
+        border-radius: 6px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="title">🍳 鱼鳞の厨房 · 家庭点菜小程序 UI 稿</h1>
+    <p class="sub">
+      微信云开发 · 购物车式下单 · 下单后评分 · 厨师标签 · 可转发 —
+      低保真视觉稿（颜色/布局示意）
+    </p>
 
-  <div class="grid">
-
-    <!-- 1. 首页菜单 -->
-    <div>
-    <div class="phone"><div class="screen">
-      <div class="capsule"><div class="dots"><span></span><span></span><span></span></div><span style="width:8px;height:8px"></span></div>
-      <div class="statusbar"><span>9:41</span><span></span></div>
-      <div class="navbar"><div class="nav-title">干饭叫一声</div></div>
-      <div class="body" style="padding:0;display:flex;flex-direction:column">
-        <div style="padding:8px 12px 4px"><div class="search" style="margin:0">🔍 搜索想吃的菜…</div></div>
-        <div class="menu-split">
-          <div class="cats">
-            <div class="cat on">🍽️<br/>我全都要</div>
-            <div class="cat">🔥<br/>镇店之宝</div>
-            <div class="cat">🍖<br/>无肉不欢</div>
-            <div class="cat">🥬<br/>草本养生</div>
-            <div class="cat">🍚<br/>干饭时刻</div>
-            <div class="cat">🍲<br/>续命靓汤</div>
-            <div class="cat">🥗<br/>冰爽开胃</div>
-          </div>
-          <div class="dishlist">
-            <div class="drow">
-              <div class="dthumb">🍅</div>
-              <div class="dmain">
-                <div class="dname">番茄炒蛋</div>
-                <div class="ddesc">家常下饭，酸甜开胃，鸡蛋嫩滑</div>
-                <div class="dtags"><span class="dtag">🧑‍🍳 小林出品</span></div>
-                <div class="dbottom">
-                  <div class="left"><span class="stars">★ 4.6</span><span>已点 28</span></div>
-                  <button class="addbtn sm">＋</button>
+    <div class="grid">
+      <!-- 1. 首页菜单 -->
+      <div>
+        <div class="phone">
+          <div class="screen">
+            <div class="capsule">
+              <div class="dots"><span></span><span></span><span></span></div>
+              <span style="width: 8px; height: 8px"></span>
+            </div>
+            <div class="statusbar"><span>9:41</span><span></span></div>
+            <div class="navbar"><div class="nav-title">鱼鳞の厨房</div></div>
+            <div
+              class="body"
+              style="padding: 0; display: flex; flex-direction: column"
+            >
+              <div style="padding: 8px 12px 4px">
+                <div class="search" style="margin: 0">🔍 搜索想吃的菜…</div>
+              </div>
+              <div class="menu-split">
+                <div class="cats">
+                  <div class="cat on">🍽️<br />我全都要</div>
+                  <div class="cat">🔥<br />镇店之宝</div>
+                  <div class="cat">🍖<br />无肉不欢</div>
+                  <div class="cat">🥬<br />草本养生</div>
+                  <div class="cat">🍚<br />干饭时刻</div>
+                  <div class="cat">🍲<br />续命靓汤</div>
+                  <div class="cat">🥗<br />冰爽开胃</div>
+                </div>
+                <div class="dishlist">
+                  <div class="drow">
+                    <div class="dthumb">🍅</div>
+                    <div class="dmain">
+                      <div class="dname">番茄炒蛋</div>
+                      <div class="ddesc">家常下饭，酸甜开胃，鸡蛋嫩滑</div>
+                      <div class="dtags">
+                        <span class="dtag">🧑‍🍳 小林出品</span>
+                      </div>
+                      <div class="dbottom">
+                        <div class="left">
+                          <span class="stars">★ 4.6</span><span>已点 28</span>
+                        </div>
+                        <button class="addbtn sm">＋</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="drow">
+                    <div
+                      class="dthumb"
+                      style="
+                        background: linear-gradient(135deg, #a0e7c0, #5ad1a0);
+                      "
+                    >
+                      🥦
+                    </div>
+                    <div class="dmain">
+                      <div class="dname">蒜蓉西兰花</div>
+                      <div class="ddesc">少油少盐，爽脆解腻</div>
+                      <div class="dtags">
+                        <span class="dtag">🧑‍🍳 小林出品</span>
+                      </div>
+                      <div class="dbottom">
+                        <div class="left">
+                          <span class="stars">★ 4.9</span><span>已点 15</span>
+                        </div>
+                        <div class="stepper sm">
+                          <button>−</button><span class="q">2</span
+                          ><button>＋</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="drow">
+                    <div
+                      class="dthumb"
+                      style="
+                        background: linear-gradient(135deg, #c3b3ff, #8f7bff);
+                      "
+                    >
+                      🍲
+                    </div>
+                    <div class="dmain">
+                      <div class="dname">红烧肉</div>
+                      <div class="ddesc">肥而不腻，入口即化，爸爸的招牌</div>
+                      <div class="dtags">
+                        <span class="dtag">👨‍🍳 老王私房</span>
+                      </div>
+                      <div class="dbottom">
+                        <div class="left">
+                          <span class="stars">★ 5.0</span><span>已点 42</span>
+                        </div>
+                        <button class="addbtn sm">＋</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="drow">
+                    <div
+                      class="dthumb"
+                      style="
+                        background: linear-gradient(135deg, #ffd0e0, #ff8fb3);
+                      "
+                    >
+                      🍤
+                    </div>
+                    <div class="dmain">
+                      <div class="dname">油焖大虾</div>
+                      <div class="ddesc">鲜甜入味，宴客硬菜</div>
+                      <div class="dtags">
+                        <span class="dtag">👨‍🍳 老王私房</span>
+                      </div>
+                      <div class="dbottom">
+                        <div class="left">
+                          <span class="stars">★ 4.8</span><span>已点 9</span>
+                        </div>
+                        <button class="addbtn sm">＋</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="drow">
+                    <div
+                      class="dthumb"
+                      style="
+                        background: linear-gradient(135deg, #ffe7a0, #ffcf5a);
+                      "
+                    >
+                      🍜
+                    </div>
+                    <div class="dmain">
+                      <div class="dname">阳春面</div>
+                      <div class="ddesc">汤头清鲜，暖胃宵夜</div>
+                      <div class="dtags"><span class="dtag">🍚 主食</span></div>
+                      <div class="dbottom">
+                        <div class="left">
+                          <span class="stars">★ 4.3</span><span>已点 11</span>
+                        </div>
+                        <button class="addbtn sm">＋</button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="drow">
-              <div class="dthumb" style="background:linear-gradient(135deg,#a0e7c0,#5ad1a0)">🥦</div>
-              <div class="dmain">
-                <div class="dname">蒜蓉西兰花</div>
-                <div class="ddesc">少油少盐，爽脆解腻</div>
-                <div class="dtags"><span class="dtag">🧑‍🍳 小林出品</span></div>
-                <div class="dbottom">
-                  <div class="left"><span class="stars">★ 4.9</span><span>已点 15</span></div>
-                  <div class="stepper sm"><button>−</button><span class="q">2</span><button>＋</button></div>
-                </div>
+
+            <div class="cartbar">
+              <div class="l">
+                <div class="cart-ic">🛒<span class="badge">3</span></div>
+                <span>已选 3 样菜</span>
+              </div>
+              <button class="go">去下单</button>
+            </div>
+
+            <div class="tabbar">
+              <div class="tab on">
+                <div class="ic">🍽️</div>
+                菜单
+              </div>
+              <div class="tab">
+                <div class="ic-wrap"><div class="ic">📋</div></div>
+                我的订单
+              </div>
+              <div class="tab">
+                <div class="ic">👤</div>
+                我的
               </div>
             </div>
-            <div class="drow">
-              <div class="dthumb" style="background:linear-gradient(135deg,#c3b3ff,#8f7bff)">🍲</div>
-              <div class="dmain">
-                <div class="dname">红烧肉</div>
-                <div class="ddesc">肥而不腻，入口即化，爸爸的招牌</div>
-                <div class="dtags"><span class="dtag">👨‍🍳 老王私房</span></div>
-                <div class="dbottom">
-                  <div class="left"><span class="stars">★ 5.0</span><span>已点 42</span></div>
-                  <button class="addbtn sm">＋</button>
-                </div>
-              </div>
-            </div>
-            <div class="drow">
-              <div class="dthumb" style="background:linear-gradient(135deg,#ffd0e0,#ff8fb3)">🍤</div>
-              <div class="dmain">
-                <div class="dname">油焖大虾</div>
-                <div class="ddesc">鲜甜入味，宴客硬菜</div>
-                <div class="dtags"><span class="dtag">👨‍🍳 老王私房</span></div>
-                <div class="dbottom">
-                  <div class="left"><span class="stars">★ 4.8</span><span>已点 9</span></div>
-                  <button class="addbtn sm">＋</button>
-                </div>
-              </div>
-            </div>
-            <div class="drow">
-              <div class="dthumb" style="background:linear-gradient(135deg,#ffe7a0,#ffcf5a)">🍜</div>
-              <div class="dmain">
-                <div class="dname">阳春面</div>
-                <div class="ddesc">汤头清鲜，暖胃宵夜</div>
-                <div class="dtags"><span class="dtag">🍚 主食</span></div>
-                <div class="dbottom">
-                  <div class="left"><span class="stars">★ 4.3</span><span>已点 11</span></div>
-                  <button class="addbtn sm">＋</button>
-                </div>
-              </div>
+            <div class="screen-label">
+              ① 首页 · 菜单 + 厨师标签筛选 + 购物车
             </div>
           </div>
         </div>
+        <div class="caption">① 菜单首页（家人浏览/选菜）</div>
       </div>
 
-      <div class="cartbar">
-        <div class="l"><div class="cart-ic">🛒<span class="badge">3</span></div><span>已选 3 样菜</span></div>
-        <button class="go">去下单</button>
-      </div>
-
-      <div class="tabbar">
-        <div class="tab on"><div class="ic">🍽️</div>菜单</div>
-        <div class="tab"><div class="ic-wrap"><div class="ic">📋</div></div>我的订单</div>
-        <div class="tab"><div class="ic">👤</div>我的</div>
-      </div>
-      <div class="screen-label">① 首页 · 菜单 + 厨师标签筛选 + 购物车</div>
-    </div></div>
-    <div class="caption">① 菜单首页（家人浏览/选菜）</div>
-    </div>
-
-    <!-- 2. 菜品详情 -->
-    <div>
-    <div class="phone"><div class="screen">
-      <div class="capsule"><div class="dots"><span></span><span></span><span></span></div><span style="width:8px;height:8px"></span></div>
-      <div class="statusbar"><span>9:41</span><span>↗ 转发</span></div>
-      <div class="body" style="padding:0">
-        <div class="hero">🍲</div>
-        <div class="sheet">
-          <h2 class="h2">红烧肉</h2>
-          <div class="row"><span class="stars">★★★★★ 5.0</span><span>·</span><span>已点 42 次</span></div>
-          <div class="dtags"><span class="dtag">👨‍🍳 老王私房</span><span class="dtag">🔥 镇店之宝</span></div>
-          <div class="desc" style="font-size:13px;color:#4b5563;line-height:1.6;margin-top:8px">
-            选三层五花肉，先焯后炒糖色，小火慢炖 50 分钟。肥而不腻，配米饭一绝。
-          </div>
-          <div class="divider"></div>
-          <p class="sec-t">大家的评价 (12)</p>
-          <div class="review"><div class="avatar">🐱</div><div class="rc">
-            <div class="rn">小妹 <span class="stars">★★★★★</span></div>
-            <div class="rt">太好吃了！下次还要点～</div></div></div>
-          <div class="review"><div class="avatar">🐰</div><div class="rc">
-            <div class="rn">老王 <span class="stars">★★★★☆</span></div>
-            <div class="rt">味道很正，就是有点甜。</div></div></div>
-        </div>
-      </div>
-      <div class="cartbar" style="bottom:14px">
-        <div class="l"><span style="font-size:13px;color:#cfd3d8">加入今天想吃的</span></div>
-        <button class="go">＋ 加入清单</button>
-      </div>
-      <div class="screen-label">② 菜品详情 · 描述 + 评分 + 评价 + 可转发</div>
-    </div></div>
-    <div class="caption">② 菜品详情（含评价区）</div>
-    </div>
-
-    <!-- 3. 下单确认 -->
-    <div>
-    <div class="phone"><div class="screen">
-      <div class="capsule"><div class="dots"><span></span><span></span><span></span></div><span style="width:8px;height:8px"></span></div>
-      <div class="statusbar"><span>9:41</span><span></span></div>
-      <div class="navbar"><div class="nav-title">确认下单</div></div>
-      <div class="body">
-        <div class="order">
-          <div class="oitem"><span>🍅 番茄炒蛋</span><span>×1</span></div>
-          <div class="oitem"><span>🥦 蒜蓉西兰花</span><span>×2</span></div>
-          <div class="oitem"><span>🍲 红烧肉</span><span>×1</span></div>
-        </div>
-        <div class="field">
-          <label>给厨师的留言（可选）</label>
-          <textarea class="ta" placeholder="例如：今晚 7 点开饭，红烧肉少放点糖～"></textarea>
-        </div>
-        <div class="field">
-          <label>用餐时间</label>
-          <div class="input">今晚 19:00　▾</div>
-        </div>
-        <div class="alist" style="background:#fff8ee;border:1px solid #ffe6c2">
-          <div style="font-size:20px">🔔</div>
-          <div style="font-size:12px;color:#9a6a1a">下单后会通知到厨师（管理员）的「我的订单」页</div>
-        </div>
-      </div>
-      <div class="cartbar" style="bottom:14px;background:var(--brand);justify-content:center">
-        <button class="go" style="background:#fff;color:var(--brand);width:90%">提交订单 · 共 4 样菜</button>
-      </div>
-      <div class="screen-label">③ 下单确认 · 留言 + 用餐时间</div>
-    </div></div>
-    <div class="caption">③ 购物车 / 下单确认</div>
-    </div>
-
-    <!-- 4. 我的订单 + 评分入口 -->
-    <div>
-    <div class="phone"><div class="screen">
-      <div class="capsule"><div class="dots"><span></span><span></span><span></span></div><span style="width:8px;height:8px"></span></div>
-      <div class="statusbar"><span>9:41</span><span></span></div>
-      <div class="navbar"><div class="nav-title">我的订单</div></div>
-      <div class="body">
-        <div class="order">
-          <div class="oh"><span class="who">今晚 19:00</span><span class="pill new">待出餐</span></div>
-          <div class="oitem"><span>🍅 番茄炒蛋 ×1</span></div>
-          <div class="oitem"><span>🥦 蒜蓉西兰花 ×2</span></div>
-          <div class="oitem"><span>🍲 红烧肉 ×1</span></div>
-          <div class="ofoot"><span>留言：少放点糖～</span><span>6/8 18:20</span></div>
-        </div>
-        <div class="order">
-          <div class="oh"><span class="who">昨天 中午</span><span class="pill done">已出餐</span></div>
-          <div class="oitem"><span>🍜 阳春面 ×1</span></div>
-          <div class="oitem"><span>🥟 韭菜饺子 ×1</span></div>
-          <div class="ofoot">
-            <span>已完成 · 给菜品打个分吧</span>
-            <button class="btn">去评分</button>
+      <!-- 2. 菜品详情 -->
+      <div>
+        <div class="phone">
+          <div class="screen">
+            <div class="capsule">
+              <div class="dots"><span></span><span></span><span></span></div>
+              <span style="width: 8px; height: 8px"></span>
+            </div>
+            <div class="statusbar"><span>9:41</span><span>↗ 转发</span></div>
+            <div class="body" style="padding: 0">
+              <div class="hero">🍲</div>
+              <div class="sheet">
+                <h2 class="h2">红烧肉</h2>
+                <div class="row">
+                  <span class="stars">★★★★★ 5.0</span><span>·</span
+                  ><span>已点 42 次</span>
+                </div>
+                <div class="dtags">
+                  <span class="dtag">👨‍🍳 老王私房</span
+                  ><span class="dtag">🔥 镇店之宝</span>
+                </div>
+                <div
+                  class="desc"
+                  style="
+                    font-size: 13px;
+                    color: #4b5563;
+                    line-height: 1.6;
+                    margin-top: 8px;
+                  "
+                >
+                  选三层五花肉，先焯后炒糖色，小火慢炖 50
+                  分钟。肥而不腻，配米饭一绝。
+                </div>
+                <div class="divider"></div>
+                <p class="sec-t">大家的评价 (12)</p>
+                <div class="review">
+                  <div class="avatar">🐱</div>
+                  <div class="rc">
+                    <div class="rn">小妹 <span class="stars">★★★★★</span></div>
+                    <div class="rt">太好吃了！下次还要点～</div>
+                  </div>
+                </div>
+                <div class="review">
+                  <div class="avatar">🐰</div>
+                  <div class="rc">
+                    <div class="rn">老王 <span class="stars">★★★★☆</span></div>
+                    <div class="rt">味道很正，就是有点甜。</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="cartbar" style="bottom: 14px">
+              <div class="l">
+                <span style="font-size: 13px; color: #cfd3d8"
+                  >加入今天想吃的</span
+                >
+              </div>
+              <button class="go">＋ 加入清单</button>
+            </div>
+            <div class="screen-label">
+              ② 菜品详情 · 描述 + 评分 + 评价 + 可转发
+            </div>
           </div>
         </div>
-        <div class="order">
-          <div class="oh"><span class="who">6月5日 晚</span><span class="pill done">已评价</span></div>
-          <div class="oitem"><span>🍲 红烧肉 ×1 　<span class="stars">★★★★★</span></span></div>
-        </div>
+        <div class="caption">② 菜品详情（含评价区）</div>
       </div>
-      <div class="tabbar">
-        <div class="tab"><div class="ic">🍽️</div>菜单</div>
-        <div class="tab on"><div class="ic">📋</div>我的订单</div>
-        <div class="tab"><div class="ic">👤</div>我的</div>
-      </div>
-      <div class="screen-label">④ 我的订单 · 状态 + 评分入口</div>
-    </div></div>
-    <div class="caption">④ 我的订单（家人视角）</div>
-    </div>
 
-    <!-- 5. 评分页 -->
-    <div>
-    <div class="phone"><div class="screen">
-      <div class="capsule"><div class="dots"><span></span><span></span><span></span></div><span style="width:8px;height:8px"></span></div>
-      <div class="statusbar"><span>9:41</span><span></span></div>
-      <div class="navbar"><div class="nav-title">给菜品评分</div></div>
-      <div class="body">
-        <div class="ratecard">
-          <div style="font-size:38px">🍜</div>
-          <div style="font-weight:700;margin-top:6px">阳春面</div>
-          <div class="bigstars">★★★★<span class="off">★</span></div>
-          <textarea class="ta" placeholder="说说这道菜怎么样…（可选）">汤头很鲜，面再筋道点就好了</textarea>
-        </div>
-        <div class="ratecard">
-          <div style="font-size:38px">🥟</div>
-          <div style="font-weight:700;margin-top:6px">韭菜饺子</div>
-          <div class="bigstars">★★★★★</div>
-          <textarea class="ta" placeholder="说说这道菜怎么样…（可选）"></textarea>
-        </div>
-        <button class="submit">提交评分</button>
-      </div>
-      <div class="screen-label">⑤ 评分 · 仅下过单的人可评 · 1-5 星 + 留言</div>
-    </div></div>
-    <div class="caption">⑤ 评分页（下单后）</div>
-    </div>
-
-    <!-- 6. 管理员后台 -->
-    <div>
-    <div class="phone"><div class="screen">
-      <div class="capsule"><div class="dots"><span></span><span></span><span></span></div><span style="width:8px;height:8px"></span></div>
-      <div class="statusbar"><span>9:41</span><span>👑 管理员</span></div>
-      <div class="navbar"><div class="nav-title">厨房管理</div></div>
-      <div class="body">
-        <div class="seg"><div class="on">菜品管理</div><div>收到的订单</div><div>厨师标签</div></div>
-        <button class="submit" style="margin:0 0 14px;padding:11px;border-radius:14px">＋ 上传新菜品</button>
-        <div class="alist">
-          <div class="athumb">🍅</div>
-          <div style="flex:1"><div class="anm">番茄炒蛋</div><div class="ade">🧑‍🍳 小林出品 · ★4.6 · 已点28</div></div>
-          <div class="aedit">编辑</div>
-        </div>
-        <div class="alist">
-          <div class="athumb" style="background:linear-gradient(135deg,#a0e7c0,#5ad1a0)">🥦</div>
-          <div style="flex:1"><div class="anm">蒜蓉西兰花</div><div class="ade">🧑‍🍳 小林出品 · ★4.9 · 已点15</div></div>
-          <div class="aedit">编辑</div>
-        </div>
-        <div class="alist">
-          <div class="athumb" style="background:linear-gradient(135deg,#c3b3ff,#8f7bff)">🍲</div>
-          <div style="flex:1"><div class="anm">红烧肉</div><div class="ade">👨‍🍳 老王私房 · ★5.0 · 已点42</div></div>
-          <div class="aedit">编辑</div>
-        </div>
-        <div class="alist" style="opacity:.55">
-          <div class="athumb" style="background:#e5e7eb">🍆</div>
-          <div style="flex:1"><div class="anm">鱼香茄子</div><div class="ade">已下架</div></div>
-          <div class="aedit">上架</div>
-        </div>
-      </div>
-      <div class="screen-label">⑥ 管理员后台 · 菜品 / 订单 / 标签</div>
-    </div></div>
-    <div class="caption">⑥ 管理员后台（菜品管理）</div>
-    </div>
-
-    <!-- 7. 上传/编辑菜品 -->
-    <div>
-    <div class="phone"><div class="screen">
-      <div class="capsule"><div class="dots"><span></span><span></span><span></span></div><span style="width:8px;height:8px"></span></div>
-      <div class="statusbar"><span>9:41</span><span></span></div>
-      <div class="navbar"><div class="nav-title">编辑菜品</div></div>
-      <div class="body">
-        <div class="field">
-          <label>菜品图片</label>
-          <div class="uploader"><div style="font-size:28px">📷</div>点击上传 / 拍照</div>
-        </div>
-        <div class="field"><label>菜名</label><div class="input">红烧肉</div></div>
-        <div class="field"><label>描述</label>
-          <textarea class="ta">选三层五花肉，小火慢炖 50 分钟，肥而不腻。</textarea></div>
-        <div class="field">
-          <label>菜系分类（单选）</label>
-          <div class="input">🍖 无肉不欢　▾</div>
-        </div>
-        <div class="field">
-          <label>厨师标签（可多选）</label>
-          <div class="tagpick">
-            <div class="chip on">👨‍🍳 老王私房</div>
-            <div class="chip">🧑‍🍳 小林出品</div>
-            <div class="chip">👵 外婆秘方</div>
-            <div class="chip">＋ 新建厨师</div>
+      <!-- 3. 下单确认 -->
+      <div>
+        <div class="phone">
+          <div class="screen">
+            <div class="capsule">
+              <div class="dots"><span></span><span></span><span></span></div>
+              <span style="width: 8px; height: 8px"></span>
+            </div>
+            <div class="statusbar"><span>9:41</span><span></span></div>
+            <div class="navbar"><div class="nav-title">确认下单</div></div>
+            <div class="body">
+              <div class="order">
+                <div class="oitem"><span>🍅 番茄炒蛋</span><span>×1</span></div>
+                <div class="oitem">
+                  <span>🥦 蒜蓉西兰花</span><span>×2</span>
+                </div>
+                <div class="oitem"><span>🍲 红烧肉</span><span>×1</span></div>
+              </div>
+              <div class="field">
+                <label>给厨师的留言（可选）</label>
+                <textarea
+                  class="ta"
+                  placeholder="例如：今晚 7 点开饭，红烧肉少放点糖～"
+                ></textarea>
+              </div>
+              <div class="field">
+                <label>用餐时间</label>
+                <div class="input">今晚 19:00　▾</div>
+              </div>
+              <div
+                class="alist"
+                style="background: #fff8ee; border: 1px solid #ffe6c2"
+              >
+                <div style="font-size: 20px">🔔</div>
+                <div style="font-size: 12px; color: #9a6a1a">
+                  下单后会通知到厨师（管理员）的「我的订单」页
+                </div>
+              </div>
+            </div>
+            <div
+              class="cartbar"
+              style="
+                bottom: 14px;
+                background: var(--brand);
+                justify-content: center;
+              "
+            >
+              <button
+                class="go"
+                style="background: #fff; color: var(--brand); width: 90%"
+              >
+                提交订单 · 共 4 样菜
+              </button>
+            </div>
+            <div class="screen-label">③ 下单确认 · 留言 + 用餐时间</div>
           </div>
         </div>
-        <div class="field">
-          <label>上架状态</label>
-          <div class="input">已上架 · 家人可见　▾</div>
+        <div class="caption">③ 购物车 / 下单确认</div>
+      </div>
+
+      <!-- 4. 我的订单 + 评分入口 -->
+      <div>
+        <div class="phone">
+          <div class="screen">
+            <div class="capsule">
+              <div class="dots"><span></span><span></span><span></span></div>
+              <span style="width: 8px; height: 8px"></span>
+            </div>
+            <div class="statusbar"><span>9:41</span><span></span></div>
+            <div class="navbar"><div class="nav-title">我的订单</div></div>
+            <div class="body">
+              <div class="order">
+                <div class="oh">
+                  <span class="who">今晚 19:00</span
+                  ><span class="pill new">待出餐</span>
+                </div>
+                <div class="oitem"><span>🍅 番茄炒蛋 ×1</span></div>
+                <div class="oitem"><span>🥦 蒜蓉西兰花 ×2</span></div>
+                <div class="oitem"><span>🍲 红烧肉 ×1</span></div>
+                <div class="ofoot">
+                  <span>留言：少放点糖～</span><span>6/8 18:20</span>
+                </div>
+              </div>
+              <div class="order">
+                <div class="oh">
+                  <span class="who">昨天 中午</span
+                  ><span class="pill done">已出餐</span>
+                </div>
+                <div class="oitem"><span>🍜 阳春面 ×1</span></div>
+                <div class="oitem"><span>🥟 韭菜饺子 ×1</span></div>
+                <div class="ofoot">
+                  <span>已完成 · 给菜品打个分吧</span>
+                  <button class="btn">去评分</button>
+                </div>
+              </div>
+              <div class="order">
+                <div class="oh">
+                  <span class="who">6月5日 晚</span
+                  ><span class="pill done">已评价</span>
+                </div>
+                <div class="oitem">
+                  <span>🍲 红烧肉 ×1 　<span class="stars">★★★★★</span></span>
+                </div>
+              </div>
+            </div>
+            <div class="tabbar">
+              <div class="tab">
+                <div class="ic">🍽️</div>
+                菜单
+              </div>
+              <div class="tab on">
+                <div class="ic">📋</div>
+                我的订单
+              </div>
+              <div class="tab">
+                <div class="ic">👤</div>
+                我的
+              </div>
+            </div>
+            <div class="screen-label">④ 我的订单 · 状态 + 评分入口</div>
+          </div>
         </div>
+        <div class="caption">④ 我的订单（家人视角）</div>
       </div>
-      <div class="cartbar" style="bottom:14px;background:var(--brand);justify-content:center">
-        <button class="go" style="background:#fff;color:var(--brand);width:90%">保存</button>
+
+      <!-- 5. 评分页 -->
+      <div>
+        <div class="phone">
+          <div class="screen">
+            <div class="capsule">
+              <div class="dots"><span></span><span></span><span></span></div>
+              <span style="width: 8px; height: 8px"></span>
+            </div>
+            <div class="statusbar"><span>9:41</span><span></span></div>
+            <div class="navbar"><div class="nav-title">给菜品评分</div></div>
+            <div class="body">
+              <div class="ratecard">
+                <div style="font-size: 38px">🍜</div>
+                <div style="font-weight: 700; margin-top: 6px">阳春面</div>
+                <div class="bigstars">★★★★<span class="off">★</span></div>
+                <textarea class="ta" placeholder="说说这道菜怎么样…（可选）">
+汤头很鲜，面再筋道点就好了</textarea
+                >
+              </div>
+              <div class="ratecard">
+                <div style="font-size: 38px">🥟</div>
+                <div style="font-weight: 700; margin-top: 6px">韭菜饺子</div>
+                <div class="bigstars">★★★★★</div>
+                <textarea
+                  class="ta"
+                  placeholder="说说这道菜怎么样…（可选）"
+                ></textarea>
+              </div>
+              <button class="submit">提交评分</button>
+            </div>
+            <div class="screen-label">
+              ⑤ 评分 · 仅下过单的人可评 · 1-5 星 + 留言
+            </div>
+          </div>
+        </div>
+        <div class="caption">⑤ 评分页（下单后）</div>
       </div>
-      <div class="screen-label">⑦ 上传/编辑菜品 · 图片+描述+多厨师标签</div>
-    </div></div>
-    <div class="caption">⑦ 上传 / 编辑菜品</div>
+
+      <!-- 6. 管理员后台 -->
+      <div>
+        <div class="phone">
+          <div class="screen">
+            <div class="capsule">
+              <div class="dots"><span></span><span></span><span></span></div>
+              <span style="width: 8px; height: 8px"></span>
+            </div>
+            <div class="statusbar"><span>9:41</span><span>👑 管理员</span></div>
+            <div class="navbar"><div class="nav-title">厨房管理</div></div>
+            <div class="body">
+              <div class="seg">
+                <div class="on">菜品管理</div>
+                <div>收到的订单</div>
+                <div>厨师标签</div>
+              </div>
+              <button
+                class="submit"
+                style="margin: 0 0 14px; padding: 11px; border-radius: 14px"
+              >
+                ＋ 上传新菜品
+              </button>
+              <div class="alist">
+                <div class="athumb">🍅</div>
+                <div style="flex: 1">
+                  <div class="anm">番茄炒蛋</div>
+                  <div class="ade">🧑‍🍳 小林出品 · ★4.6 · 已点28</div>
+                </div>
+                <div class="aedit">编辑</div>
+              </div>
+              <div class="alist">
+                <div
+                  class="athumb"
+                  style="background: linear-gradient(135deg, #a0e7c0, #5ad1a0)"
+                >
+                  🥦
+                </div>
+                <div style="flex: 1">
+                  <div class="anm">蒜蓉西兰花</div>
+                  <div class="ade">🧑‍🍳 小林出品 · ★4.9 · 已点15</div>
+                </div>
+                <div class="aedit">编辑</div>
+              </div>
+              <div class="alist">
+                <div
+                  class="athumb"
+                  style="background: linear-gradient(135deg, #c3b3ff, #8f7bff)"
+                >
+                  🍲
+                </div>
+                <div style="flex: 1">
+                  <div class="anm">红烧肉</div>
+                  <div class="ade">👨‍🍳 老王私房 · ★5.0 · 已点42</div>
+                </div>
+                <div class="aedit">编辑</div>
+              </div>
+              <div class="alist" style="opacity: 0.55">
+                <div class="athumb" style="background: #e5e7eb">🍆</div>
+                <div style="flex: 1">
+                  <div class="anm">鱼香茄子</div>
+                  <div class="ade">已下架</div>
+                </div>
+                <div class="aedit">上架</div>
+              </div>
+            </div>
+            <div class="screen-label">⑥ 管理员后台 · 菜品 / 订单 / 标签</div>
+          </div>
+        </div>
+        <div class="caption">⑥ 管理员后台（菜品管理）</div>
+      </div>
+
+      <!-- 7. 上传/编辑菜品 -->
+      <div>
+        <div class="phone">
+          <div class="screen">
+            <div class="capsule">
+              <div class="dots"><span></span><span></span><span></span></div>
+              <span style="width: 8px; height: 8px"></span>
+            </div>
+            <div class="statusbar"><span>9:41</span><span></span></div>
+            <div class="navbar"><div class="nav-title">编辑菜品</div></div>
+            <div class="body">
+              <div class="field">
+                <label>菜品图片</label>
+                <div class="uploader">
+                  <div style="font-size: 28px">📷</div>
+                  点击上传 / 拍照
+                </div>
+              </div>
+              <div class="field">
+                <label>菜名</label>
+                <div class="input">红烧肉</div>
+              </div>
+              <div class="field">
+                <label>描述</label>
+                <textarea class="ta">
+选三层五花肉，小火慢炖 50 分钟，肥而不腻。</textarea
+                >
+              </div>
+              <div class="field">
+                <label>菜系分类（单选）</label>
+                <div class="input">🍖 无肉不欢　▾</div>
+              </div>
+              <div class="field">
+                <label>厨师标签（可多选）</label>
+                <div class="tagpick">
+                  <div class="chip on">👨‍🍳 老王私房</div>
+                  <div class="chip">🧑‍🍳 小林出品</div>
+                  <div class="chip">👵 外婆秘方</div>
+                  <div class="chip">＋ 新建厨师</div>
+                </div>
+              </div>
+              <div class="field">
+                <label>上架状态</label>
+                <div class="input">已上架 · 家人可见　▾</div>
+              </div>
+            </div>
+            <div
+              class="cartbar"
+              style="
+                bottom: 14px;
+                background: var(--brand);
+                justify-content: center;
+              "
+            >
+              <button
+                class="go"
+                style="background: #fff; color: var(--brand); width: 90%"
+              >
+                保存
+              </button>
+            </div>
+            <div class="screen-label">
+              ⑦ 上传/编辑菜品 · 图片+描述+多厨师标签
+            </div>
+          </div>
+        </div>
+        <div class="caption">⑦ 上传 / 编辑菜品</div>
+      </div>
+
+      <!-- 8. 管理员收到的订单 -->
+      <div>
+        <div class="phone">
+          <div class="screen">
+            <div class="capsule">
+              <div class="dots"><span></span><span></span><span></span></div>
+              <span style="width: 8px; height: 8px"></span>
+            </div>
+            <div class="statusbar"><span>9:41</span><span>👑 管理员</span></div>
+            <div class="navbar"><div class="nav-title">收到的订单</div></div>
+            <div class="body">
+              <div class="seg">
+                <div>菜品管理</div>
+                <div class="on">收到的订单</div>
+                <div>厨师标签</div>
+              </div>
+              <div class="order">
+                <div class="oh">
+                  <span class="who">🐱 小妹 · 今晚19:00</span
+                  ><span class="pill new">新订单</span>
+                </div>
+                <div class="oitem"><span>🍅 番茄炒蛋 ×1</span></div>
+                <div class="oitem"><span>🥦 蒜蓉西兰花 ×2</span></div>
+                <div class="oitem"><span>🍲 红烧肉 ×1</span></div>
+                <div class="ofoot">
+                  <span>留言：少放点糖～</span>
+                  <button class="btn">标记出餐</button>
+                </div>
+              </div>
+              <div class="order">
+                <div class="oh">
+                  <span class="who">🐰 老王 · 今晚19:00</span
+                  ><span class="pill new">新订单</span>
+                </div>
+                <div class="oitem"><span>🍜 阳春面 ×2</span></div>
+                <div class="ofoot">
+                  <span>留言：多放葱</span>
+                  <button class="btn">标记出餐</button>
+                </div>
+              </div>
+            </div>
+            <div class="screen-label">⑧ 管理员 · 新订单红点提醒 + 出餐管理</div>
+          </div>
+        </div>
+        <div class="caption">⑧ 管理员收到的订单（App 内提醒）</div>
+      </div>
     </div>
 
-    <!-- 8. 管理员收到的订单 -->
-    <div>
-    <div class="phone"><div class="screen">
-      <div class="capsule"><div class="dots"><span></span><span></span><span></span></div><span style="width:8px;height:8px"></span></div>
-      <div class="statusbar"><span>9:41</span><span>👑 管理员</span></div>
-      <div class="navbar"><div class="nav-title">收到的订单</div></div>
-      <div class="body">
-        <div class="seg"><div>菜品管理</div><div class="on">收到的订单</div><div>厨师标签</div></div>
-        <div class="order">
-          <div class="oh"><span class="who">🐱 小妹 · 今晚19:00</span><span class="pill new">新订单</span></div>
-          <div class="oitem"><span>🍅 番茄炒蛋 ×1</span></div>
-          <div class="oitem"><span>🥦 蒜蓉西兰花 ×2</span></div>
-          <div class="oitem"><span>🍲 红烧肉 ×1</span></div>
-          <div class="ofoot"><span>留言：少放点糖～</span>
-            <button class="btn">标记出餐</button></div>
-        </div>
-        <div class="order">
-          <div class="oh"><span class="who">🐰 老王 · 今晚19:00</span><span class="pill new">新订单</span></div>
-          <div class="oitem"><span>🍜 阳春面 ×2</span></div>
-          <div class="ofoot"><span>留言：多放葱</span>
-            <button class="btn">标记出餐</button></div>
-        </div>
-      </div>
-      <div class="screen-label">⑧ 管理员 · 新订单红点提醒 + 出餐管理</div>
-    </div></div>
-    <div class="caption">⑧ 管理员收到的订单（App 内提醒）</div>
+    <div class="legend">
+      <h3>说明</h3>
+      这是
+      <b>低保真 UI 稿</b
+      >，用于确认信息架构、页面流程与视觉风格（微信绿主色、卡片式布局）。真实小程序会用
+      WeUI 风格组件、真实图片、圆角与微交互。<br />
+      <b>核心流程：</b>家人浏览菜单 → 选菜加入清单（购物车）→
+      确认下单（留言/用餐时间）→ 管理员「收到的订单」红点提醒 → 出餐 →
+      家人在「我的订单」对吃过的菜评分 → 评分回写到菜品的
+      <code>平均分 / 下单数</code>。<br />
+      <b>角色：</b>管理员通过
+      <code>openid 白名单</code>
+      识别，多一个「厨房管理」入口；普通家人看不到后台。<br />
+      <b>转发：</b>菜单页与详情页支持
+      <code>onShareAppMessage</code>，可转发给微信好友/群直接打开选菜。
     </div>
-
-  </div>
-
-  <div class="legend">
-    <h3>说明</h3>
-    这是 <b>低保真 UI 稿</b>，用于确认信息架构、页面流程与视觉风格（微信绿主色、卡片式布局）。真实小程序会用 WeUI 风格组件、真实图片、圆角与微交互。<br/>
-    <b>核心流程：</b>家人浏览菜单 → 选菜加入清单（购物车）→ 确认下单（留言/用餐时间）→ 管理员「收到的订单」红点提醒 → 出餐 → 家人在「我的订单」对吃过的菜评分 → 评分回写到菜品的 <code>平均分 / 下单数</code>。<br/>
-    <b>角色：</b>管理员通过 <code>openid 白名单</code> 识别，多一个「厨房管理」入口；普通家人看不到后台。<br/>
-    <b>转发：</b>菜单页与详情页支持 <code>onShareAppMessage</code>，可转发给微信好友/群直接打开选菜。
-  </div>
-</body>
+  </body>
 </html>

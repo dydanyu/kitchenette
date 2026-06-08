@@ -2,3 +2,4 @@ node_modules/
 cloudfunctions/*/node_modules/
 miniprogram_npm/
 .DS_Store
+project.private.config.json

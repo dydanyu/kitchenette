@@ -1,4 +1,4 @@
-# 干饭叫一声 · 家庭点菜小程序 — 设计方案
+# 鱼鳞の厨房 · 家庭点菜小程序 — 设计方案
 
 > 状态：已与用户确认设计方向（2026-06-08）
 > UI 稿：`docs/mockups/ui-mockup.html`（8 屏低保真）
@@ -8,6 +8,7 @@
 一个家庭自用的微信小程序：家人/朋友浏览家里厨师能做的菜，选菜下单，厨师（管理员）收到订单去做，吃过的人给菜打分。低并发、零运维、可在微信里转发。
 
 成功标准：
+
 - 家人能在微信里打开、选菜、下单，并把小程序转发给其他家人。
 - 管理员能上传/编辑/上下架菜品、管理厨师标签、查看并处理订单。
 - 下单后管理员能在 App 内收到提醒（红点），无需短信/服务器推送。
@@ -15,15 +16,15 @@
 
 ## 2. 关键决策（已确认）
 
-| 维度 | 决策 |
-|------|------|
-| 后端 | 微信云开发（CloudBase）：云数据库 + 云函数 + 云存储 |
-| 下单通知 | 仅 App 内：管理员「收到的订单」红点 + 列表，不用订阅消息 |
-| 下单形态 | 购物车式：可多选菜品 + 数量，一次提交一个订单 |
-| 管理员识别 | `openid 白名单`（存配置集合，云函数校验） |
-| 评分权限 | 仅「该订单内 + 订单已出餐」的下单者可评分，1–5 星 + 可选留言 |
-| 标签体系 | 两套维度：菜系分类（单选）+ 厨师标签（多选，真实厨师名） |
-| 前端框架 | 微信原生小程序（不引第三方框架），WeUI 风格 |
+| 维度       | 决策                                                         |
+| ---------- | ------------------------------------------------------------ |
+| 后端       | 微信云开发（CloudBase）：云数据库 + 云函数 + 云存储          |
+| 下单通知   | 仅 App 内：管理员「收到的订单」红点 + 列表，不用订阅消息     |
+| 下单形态   | 购物车式：可多选菜品 + 数量，一次提交一个订单                |
+| 管理员识别 | `openid 白名单`（存配置集合，云函数校验）                    |
+| 评分权限   | 仅「该订单内 + 订单已出餐」的下单者可评分，1–5 星 + 可选留言 |
+| 标签体系   | 两套维度：菜系分类（单选）+ 厨师标签（多选，真实厨师名）     |
+| 前端框架   | 微信原生小程序（不引第三方框架），WeUI 风格                  |
 
 ## 3. 整体架构
 
@@ -44,83 +45,87 @@
 ## 4. 数据模型（云数据库集合）
 
 ### dishes（菜品）
-| 字段 | 类型 | 说明 |
-|------|------|------|
-| _id | string | 菜品 ID |
-| name | string | 菜名 |
-| desc | string | 描述 |
-| image | string | 云存储 fileID |
-| categoryId | string | 菜系分类（单选，关联 categories） |
-| chefTagIds | string[] | 厨师标签（多选，关联 chefTags） |
-| status | string | `on` 上架 / `off` 下架 |
-| avgRating | number | 平均分（评分聚合写入，初始 0） |
-| ratingCount | number | 评分人数 |
-| orderCount | number | 累计被下单次数 |
-| createdAt / updatedAt | date | 时间戳 |
+
+| 字段                  | 类型     | 说明                              |
+| --------------------- | -------- | --------------------------------- |
+| \_id                  | string   | 菜品 ID                           |
+| name                  | string   | 菜名                              |
+| desc                  | string   | 描述                              |
+| image                 | string   | 云存储 fileID                     |
+| categoryId            | string   | 菜系分类（单选，关联 categories） |
+| chefTagIds            | string[] | 厨师标签（多选，关联 chefTags）   |
+| status                | string   | `on` 上架 / `off` 下架            |
+| avgRating             | number   | 平均分（评分聚合写入，初始 0）    |
+| ratingCount           | number   | 评分人数                          |
+| orderCount            | number   | 累计被下单次数                    |
+| createdAt / updatedAt | date     | 时间戳                            |
 
 ### orders（订单）
-| 字段 | 类型 | 说明 |
-|------|------|------|
-| _id | string | 订单 ID |
-| userOpenid | string | 下单人 openid |
-| userName / userAvatar | string | 下单人昵称/头像（下单时快照） |
-| items | array | `[{ dishId, name, qty }]` |
-| remark | string | 给厨师的留言（可选） |
-| mealTime | string | 用餐时间（如「今晚 19:00」） |
-| status | string | `pending` 待出餐 / `served` 已出餐 |
-| rated | boolean | 是否已评分（控制评分入口） |
-| createdAt | date | 下单时间 |
+
+| 字段                  | 类型    | 说明                               |
+| --------------------- | ------- | ---------------------------------- |
+| \_id                  | string  | 订单 ID                            |
+| userOpenid            | string  | 下单人 openid                      |
+| userName / userAvatar | string  | 下单人昵称/头像（下单时快照）      |
+| items                 | array   | `[{ dishId, name, qty }]`          |
+| remark                | string  | 给厨师的留言（可选）               |
+| mealTime              | string  | 用餐时间（如「今晚 19:00」）       |
+| status                | string  | `pending` 待出餐 / `served` 已出餐 |
+| rated                 | boolean | 是否已评分（控制评分入口）         |
+| createdAt             | date    | 下单时间                           |
 
 ### ratings（评分）
-| 字段 | 类型 | 说明 |
-|------|------|------|
-| _id | string | 评分 ID |
-| orderId | string | 关联订单 |
-| dishId | string | 被评菜品 |
-| userOpenid | string | 评分人 |
-| score | number | 1–5 |
-| comment | string | 留言（可选） |
-| createdAt | date | 时间戳 |
+
+| 字段       | 类型   | 说明         |
+| ---------- | ------ | ------------ |
+| \_id       | string | 评分 ID      |
+| orderId    | string | 关联订单     |
+| dishId     | string | 被评菜品     |
+| userOpenid | string | 评分人       |
+| score      | number | 1–5          |
+| comment    | string | 留言（可选） |
+| createdAt  | date   | 时间戳       |
 
 唯一性：同一 `(orderId, dishId, userOpenid)` 只允许一条，防重复评分。
 
 ### chefTags（厨师标签）
+
 `{ _id, name, emoji }` — 如 `{ name:"老王私房", emoji:"👨‍🍳" }`，管理员可自建。
 
 ### categories（菜系分类）
+
 `{ _id, name, emoji, sort }` — 如 `{ name:"无肉不欢", emoji:"🍖", sort:2 }`。
 默认：我全都要(虚拟/全部) / 镇店之宝 / 无肉不欢 / 草本养生 / 干饭时刻 / 续命靓汤 / 冰爽开胃。
 （「我全都要」是前端「全部」入口，不必作为真实菜品分类存储。）
 
 ### config（配置）
+
 `{ _id:"admins", adminOpenids: string[] }` — 管理员白名单。
 
 ## 5. 云函数（写/敏感操作）
 
-| 云函数 | 职责 |
-|--------|------|
-| `placeOrder` | 校验菜品有效，创建订单，累加各菜 `orderCount` |
-| `updateOrderStatus` | 管理员把订单标记为 `served` |
-| `submitRating` | 校验「该用户在该订单内 + 订单已 served + 未重复」，写 ratings，重算该菜 `avgRating/ratingCount`，订单标记 `rated` |
-| `saveDish` | 管理员新增/编辑/上下架菜品（含图片 fileID） |
-| `manageMeta` | 管理员增删改 chefTags / categories |
-| `getMyContext` | 返回当前 openid 是否管理员 + 基本资料（前端据此显示后台入口） |
+| 云函数              | 职责                                                                                                              |
+| ------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| `placeOrder`        | 校验菜品有效，创建订单，累加各菜 `orderCount`                                                                     |
+| `updateOrderStatus` | 管理员把订单标记为 `served`                                                                                       |
+| `submitRating`      | 校验「该用户在该订单内 + 订单已 served + 未重复」，写 ratings，重算该菜 `avgRating/ratingCount`，订单标记 `rated` |
+| `saveDish`          | 管理员新增/编辑/上下架菜品（含图片 fileID）                                                                       |
+| `manageMeta`        | 管理员增删改 chefTags / categories                                                                                |
+| `getMyContext`      | 返回当前 openid 是否管理员 + 基本资料（前端据此显示后台入口）                                                     |
 
 所有管理员云函数内部先查 `config.adminOpenids` 校验当前 `OPENID`。
 
 ## 6. 页面结构
 
 **家人端（TabBar 3 项）**
+
 1. 菜单首页 — 左菜系分类 + 右紧凑菜品列表 + 搜索 + 底部购物车条
 2. 菜品详情 — 大图 + 描述 + 评分 + 评价列表 + 加入清单（可转发）
 3. 下单确认 — 购物车清单 + 留言 + 用餐时间 + 提交
 4. 我的订单 — 订单状态（待出餐/已出餐/已评价）+ 评分入口
 5. 评分页 — 对订单内菜品逐个 1–5 星 + 留言
 
-**管理员端（白名单可见的「厨房管理」入口）**
-6. 厨房管理 — 三段：菜品管理 / 收到的订单 / 厨师标签
-7. 上传·编辑菜品 — 图片上传 + 菜名 + 描述 + 菜系分类(单选) + 厨师标签(多选) + 上架状态
-8. 收到的订单 — 新订单红点 + 出餐管理（标记出餐）
+**管理员端（白名单可见的「厨房管理」入口）** 6. 厨房管理 — 三段：菜品管理 / 收到的订单 / 厨师标签 7. 上传·编辑菜品 — 图片上传 + 菜名 + 描述 + 菜系分类(单选) + 厨师标签(多选) + 上架状态 8. 收到的订单 — 新订单红点 + 出餐管理（标记出餐）
 
 ## 7. 核心数据流
 

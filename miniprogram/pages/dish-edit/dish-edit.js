@@ -1,4 +1,16 @@
 const { call } = require('../../utils/cloud');
+
+// 菜品图压缩：长边 1280、质量 70%，失败则用原图
+function compress(src) {
+  return new Promise((resolve) => {
+    wx.compressImage({
+      src, quality: 70, compressedWidth: 1280,
+      success: (r) => resolve(r.tempFilePath),
+      fail: () => resolve(src),
+    });
+  });
+}
+
 Page({
   data: {
     dishId: '', image: '', name: '', desc: '',
@@ -35,8 +47,9 @@ Page({
   },
   toggleStatus() { this.setData({ status: this.data.status === 'on' ? 'off' : 'on' }); },
   async chooseImage() {
-    const res = await wx.chooseMedia({ count: 1, mediaType: ['image'] });
-    const filePath = res.tempFiles[0].tempFilePath;
+    const res = await wx.chooseMedia({ count: 1, mediaType: ['image'], sizeType: ['compressed'] });
+    let filePath = res.tempFiles[0].tempFilePath;
+    filePath = await compress(filePath);
     wx.showLoading({ title: '上传中' });
     const up = await wx.cloud.uploadFile({ cloudPath: `dishes/${Date.now()}.jpg`, filePath });
     wx.hideLoading();

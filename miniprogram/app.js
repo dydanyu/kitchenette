@@ -1,6 +1,6 @@
 App({
   globalData: {
-    env: 'ENV_ID',
+    env: 'cloud1-d4g385a6de11ca191',
     cart: {},
     isAdmin: false,
     openid: '',

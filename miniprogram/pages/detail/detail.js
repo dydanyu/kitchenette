@@ -1,6 +1,7 @@
 const app = getApp();
 const { addItem, totalCount } = require('../../utils/cart');
 const { formatRating, starString } = require('../../utils/format');
+const { resolveImages } = require('../../utils/cloud');
 
 Page({
   data: { dish: null, reviews: [] },
@@ -13,6 +14,7 @@ Page({
     const tagMap = {};
     tagsRes.data.forEach((t) => { tagMap[t._id] = `${t.emoji || ''} ${t.name}`.trim(); });
     dish.chefTagNames = (dish.chefTagIds || []).map((id) => tagMap[id]).filter(Boolean);
+    await resolveImages([dish]);
     const reviews = (await db.collection('ratings').where({ dishId: this.dishId })
       .orderBy('createdAt', 'desc').limit(20).get()).data
       .map((r) => ({ ...r, starText: starString(r.score), who: '家人' }));

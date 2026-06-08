@@ -1,0 +1,19 @@
+.tabbar {
+  position: fixed; left: 0; right: 0; bottom: 0;
+  height: 100rpx; display: flex;
+  background: #fff; border-top: 1rpx solid #eef0f3;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.tab {
+  flex: 1; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 4rpx;
+  font-size: 22rpx; color: #9aa3ad;
+}
+.tab.on { color: #07c160; }
+.ic { font-size: 40rpx; line-height: 1; position: relative; }
+.reddot {
+  position: absolute; top: -8rpx; right: -18rpx;
+  background: #ff4d4f; color: #fff; font-size: 18rpx;
+  min-width: 28rpx; height: 28rpx; line-height: 28rpx; text-align: center;
+  border-radius: 14rpx; padding: 0 6rpx;
+}
