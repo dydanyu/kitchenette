@@ -1,0 +1,27 @@
+<view class="wrap">
+  <view class="field"><view class="label">菜品图片</view>
+    <view class="uploader" bindtap="chooseImage">
+      <image wx:if="{{image}}" class="preview" src="{{image}}" mode="aspectFill"></image>
+      <view wx:else class="ph">📷 点击上传 / 拍照</view>
+    </view>
+  </view>
+  <view class="field"><view class="label">菜名</view>
+    <input class="input" value="{{name}}" bindinput="onName" placeholder="如：红烧肉"></input></view>
+  <view class="field"><view class="label">描述</view>
+    <textarea class="ta" value="{{desc}}" bindinput="onDesc" placeholder="做法、口味…"></textarea></view>
+  <view class="field"><view class="label">菜系分类（单选）</view>
+    <picker mode="selector" range="{{categories}}" range-key="name" value="{{catIndex}}" bindchange="pickCat">
+      <view class="input">{{categories[catIndex].emoji}} {{categories[catIndex].name}} ▾</view>
+    </picker>
+  </view>
+  <view class="field"><view class="label">厨师标签（可多选）</view>
+    <view class="tagpick">
+      <view wx:for="{{tags}}" wx:key="_id"
+            class="chip {{selectedTagIds.indexOf(item._id)>=0?'on':''}}"
+            data-id="{{item._id}}" bindtap="toggleTag">{{item.emoji}} {{item.name}}</view>
+    </view>
+  </view>
+  <view class="field"><view class="label">上架状态</view>
+    <view class="input" bindtap="toggleStatus">{{status==='on'?'已上架 · 家人可见':'已下架'}} ▾</view></view>
+  <view class="btn-primary save" bindtap="save">保存</view>
+</view>

@@ -1,0 +1,8 @@
+page { background: #f3f4f6; color: #1f2937;
+  font-family: -apple-system, "PingFang SC", sans-serif; }
+.brand { color: #07c160; }
+.card { background:#fff; border-radius:16rpx; box-shadow:0 2rpx 8rpx rgba(17,24,39,.04); }
+.dtag { font-size:20rpx; padding:2rpx 12rpx; border-radius:20rpx;
+  background:#eafaf0; color:#06ad56; margin-right:8rpx; }
+.stars { color:#ffb400; font-size:22rpx; }
+.btn-primary { background:#07c160; color:#fff; border-radius:28rpx; }

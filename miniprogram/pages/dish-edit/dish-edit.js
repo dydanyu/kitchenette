@@ -1,0 +1,60 @@
+const { call } = require('../../utils/cloud');
+Page({
+  data: {
+    dishId: '', image: '', name: '', desc: '',
+    categoryId: '', categories: [], catIndex: 0,
+    tags: [], selectedTagIds: [], status: 'on',
+  },
+  async onLoad(q) {
+    const db = wx.cloud.database();
+    const categories = (await db.collection('categories').orderBy('sort', 'asc').get()).data;
+    const tags = (await db.collection('chefTags').get()).data;
+    let patch = { categories, tags };
+    if (q.id) {
+      const d = (await db.collection('dishes').doc(q.id).get()).data;
+      const catIndex = Math.max(0, categories.findIndex((c) => c._id === d.categoryId));
+      patch = { ...patch, dishId: q.id, image: d.image, name: d.name, desc: d.desc,
+        categoryId: d.categoryId, catIndex, selectedTagIds: d.chefTagIds || [], status: d.status };
+    } else if (categories.length) {
+      patch.categoryId = categories[0]._id;
+    }
+    this.setData(patch);
+  },
+  onName(e) { this.setData({ name: e.detail.value }); },
+  onDesc(e) { this.setData({ desc: e.detail.value }); },
+  pickCat(e) {
+    const i = Number(e.detail.value);
+    this.setData({ catIndex: i, categoryId: this.data.categories[i]._id });
+  },
+  toggleTag(e) {
+    const id = e.currentTarget.dataset.id;
+    const sel = this.data.selectedTagIds.slice();
+    const at = sel.indexOf(id);
+    at >= 0 ? sel.splice(at, 1) : sel.push(id);
+    this.setData({ selectedTagIds: sel });
+  },
+  toggleStatus() { this.setData({ status: this.data.status === 'on' ? 'off' : 'on' }); },
+  async chooseImage() {
+    const res = await wx.chooseMedia({ count: 1, mediaType: ['image'] });
+    const filePath = res.tempFiles[0].tempFilePath;
+    wx.showLoading({ title: '上传中' });
+    const up = await wx.cloud.uploadFile({ cloudPath: `dishes/${Date.now()}.jpg`, filePath });
+    wx.hideLoading();
+    this.setData({ image: up.fileID });
+  },
+  async save() {
+    if (!this.data.name.trim()) return wx.showToast({ title: '请填菜名', icon: 'none' });
+    wx.showLoading({ title: '保存中' });
+    const r = await call('saveDish', {
+      dishId: this.data.dishId || undefined,
+      dish: {
+        name: this.data.name, desc: this.data.desc, image: this.data.image,
+        categoryId: this.data.categoryId, chefTagIds: this.data.selectedTagIds, status: this.data.status,
+      },
+    });
+    wx.hideLoading();
+    if (!r.ok) return wx.showToast({ title: r.msg || '保存失败', icon: 'none' });
+    wx.showToast({ title: '已保存' });
+    setTimeout(() => wx.navigateBack(), 700);
+  },
+});

@@ -1,0 +1,41 @@
+<view class="page">
+  <view class="search">🔍 搜索想吃的菜…</view>
+  <view wx:if="{{isAdmin}}" class="admin-entry" bindtap="goAdmin">
+    👑 厨房管理 <text wx:if="{{pendingCount>0}}" class="reddot">{{pendingCount}}</text>
+  </view>
+
+  <view class="split">
+    <scroll-view scroll-y class="cats">
+      <view wx:for="{{categories}}" wx:key="_id"
+            class="cat {{activeCat===item._id?'on':''}}"
+            data-id="{{item._id}}" bindtap="pickCat">
+        <view class="cat-emoji">{{item.emoji}}</view>{{item.name}}
+      </view>
+    </scroll-view>
+
+    <scroll-view scroll-y class="dishlist">
+      <block wx:for="{{dishes}}" wx:key="_id">
+        <view wx:if="{{activeCat==='all' || item.categoryId===activeCat}}"
+              class="drow" data-id="{{item._id}}" bindtap="goDetail">
+          <image class="dthumb" src="{{item.image}}" mode="aspectFill"></image>
+          <view class="dmain">
+            <view class="dname">{{item.name}}</view>
+            <view class="ddesc">{{item.desc}}</view>
+            <view class="dtags">
+              <text wx:for="{{item.chefTagNames}}" wx:for-item="t" wx:key="*this" class="dtag">{{t}}</text>
+            </view>
+            <view class="dbottom">
+              <view class="dmeta"><text class="stars">{{item.ratingText}}</text> · 已点 {{item.orderCount||0}}</view>
+              <view class="add" catchtap="addToCart" data-dish="{{item}}">＋</view>
+            </view>
+          </view>
+        </view>
+      </block>
+    </scroll-view>
+  </view>
+
+  <view wx:if="{{cartCount>0}}" class="cartbar" bindtap="goConfirm">
+    <view>🛒 已选 {{cartCount}} 样</view>
+    <view class="go">去下单</view>
+  </view>
+</view>

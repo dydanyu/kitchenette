@@ -1,0 +1,8 @@
+{
+  "miniprogramRoot": "miniprogram/",
+  "cloudfunctionRoot": "cloudfunctions/",
+  "projectname": "kitchenette",
+  "appid": "touristappid",
+  "setting": { "es6": true, "postcss": true, "minified": true },
+  "compileType": "miniprogram"
+}

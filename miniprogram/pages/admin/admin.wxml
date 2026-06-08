@@ -1,0 +1,26 @@
+<view class="wrap">
+  <view class="seg">
+    <view class="seg-i {{tab==='dishes'?'on':''}}" data-tab="dishes" bindtap="switchTab">菜品管理</view>
+    <view class="seg-i" bindtap="goOrders">收到的订单</view>
+    <view class="seg-i {{tab==='tags'?'on':''}}" data-tab="tags" bindtap="switchTab">厨师标签</view>
+  </view>
+
+  <block wx:if="{{tab==='dishes'}}">
+    <view class="btn-primary newbtn" bindtap="addDish">＋ 上传新菜品</view>
+    <view wx:for="{{dishes}}" wx:key="_id" class="card alist" data-id="{{item._id}}" bindtap="editDish">
+      <image class="athumb" src="{{item.image}}" mode="aspectFill"></image>
+      <view class="ainfo">
+        <view class="anm">{{item.name}}</view>
+        <view class="ade">★{{item.avgRating||0}} · 已点{{item.orderCount||0}} · {{item.status==='on'?'已上架':'已下架'}}</view>
+      </view>
+      <view class="aedit">编辑</view>
+    </view>
+  </block>
+
+  <block wx:if="{{tab==='tags'}}">
+    <view class="btn-primary newbtn" bindtap="addTag">＋ 新建厨师标签</view>
+    <view wx:for="{{tags}}" wx:key="_id" class="card alist">
+      <view class="anm">{{item.emoji}} {{item.name}}</view>
+    </view>
+  </block>
+</view>

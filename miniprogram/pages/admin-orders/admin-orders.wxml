@@ -1,0 +1,15 @@
+<view class="wrap">
+  <view wx:for="{{orders}}" wx:key="_id" class="card order">
+    <view class="oh">
+      <text class="who">{{item.userName}} · {{item.mealTime}}</text>
+      <text wx:if="{{item.isNew}}" class="pill new">新订单</text>
+      <text wx:else class="pill done">已出餐</text>
+    </view>
+    <view wx:for="{{item.items}}" wx:for-item="d" wx:key="dishId" class="oitem">{{d.name}} ×{{d.qty}}</view>
+    <view class="ofoot">
+      <text wx:if="{{item.remark}}">留言：{{item.remark}}</text>
+      <view wx:if="{{item.isNew}}" class="btn-primary mark" data-id="{{item._id}}" bindtap="markServed">标记出餐</view>
+    </view>
+  </view>
+  <view wx:if="{{orders.length===0}}" class="empty">还没有订单～</view>
+</view>

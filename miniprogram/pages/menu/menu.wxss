@@ -1,0 +1,21 @@
+.page { display:flex; flex-direction:column; height:100vh; }
+.search { margin:16rpx 24rpx; background:#fff; border-radius:40rpx; padding:18rpx 28rpx; color:#9aa3ad; font-size:26rpx; }
+.admin-entry { margin:0 24rpx 12rpx; color:#06ad56; font-size:26rpx; font-weight:bold; }
+.reddot { background:#ff4d4f; color:#fff; font-size:20rpx; border-radius:20rpx; padding:0 10rpx; margin-left:8rpx; }
+.split { flex:1; display:flex; overflow:hidden; background:#fff; }
+.cats { width:172rpx; background:#f3f4f6; }
+.cat { padding:30rpx 8rpx; text-align:center; font-size:24rpx; color:#6b7280; position:relative; }
+.cat.on { background:#fff; color:#1f2937; font-weight:bold; }
+.cat.on::before { content:''; position:absolute; left:0; top:28rpx; bottom:28rpx; width:6rpx; background:#07c160; border-radius:4rpx; }
+.cat-emoji { font-size:32rpx; }
+.dishlist { flex:1; padding:8rpx 24rpx 140rpx; }
+.drow { display:flex; gap:20rpx; padding:24rpx 0; border-bottom:1rpx solid #eef0f3; }
+.dthumb { width:124rpx; height:124rpx; border-radius:16rpx; background:#f0f2f5; flex:0 0 auto; }
+.dmain { flex:1; min-width:0; display:flex; flex-direction:column; }
+.dname { font-size:28rpx; font-weight:bold; }
+.ddesc { font-size:22rpx; color:#6b7280; margin:6rpx 0; }
+.dbottom { display:flex; justify-content:space-between; align-items:flex-end; margin-top:auto; }
+.dmeta { font-size:22rpx; color:#6b7280; }
+.add { width:52rpx; height:52rpx; border-radius:50%; background:#07c160; color:#fff; font-size:40rpx; text-align:center; line-height:48rpx; }
+.cartbar { position:fixed; left:24rpx; right:24rpx; bottom:24rpx; background:#2b2f36; color:#fff; border-radius:48rpx; padding:20rpx 32rpx; display:flex; justify-content:space-between; align-items:center; font-size:26rpx; }
+.cartbar .go { background:#07c160; padding:14rpx 36rpx; border-radius:36rpx; font-weight:bold; }

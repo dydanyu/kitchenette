@@ -1,0 +1,13 @@
+<view class="wrap">
+  <view wx:for="{{rows}}" wx:key="dishId" wx:for-index="idx" class="card ratecard">
+    <view class="rname">{{item.name}}</view>
+    <view class="bigstars">
+      <text wx:for="{{[1,2,3,4,5]}}" wx:for-item="s" wx:key="*this"
+            class="star {{s<=item.score?'on':''}}"
+            data-idx="{{idx}}" data-score="{{s}}" bindtap="setScore">★</text>
+    </view>
+    <textarea class="ta" placeholder="说说这道菜怎么样…（可选）"
+              data-idx="{{idx}}" bindinput="onComment" value="{{item.comment}}"></textarea>
+  </view>
+  <view class="btn-primary sub" bindtap="submit">提交评分</view>
+</view>

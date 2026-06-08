@@ -1,0 +1,18 @@
+<view class="wrap">
+  <view class="card list">
+    <view wx:for="{{items}}" wx:key="dishId" class="oitem">
+      <text>{{item.name}}</text>
+      <view class="stepper">
+        <text class="sbtn" data-id="{{item.dishId}}" data-delta="-1" bindtap="changeQty">−</text>
+        <text class="q">{{item.qty}}</text>
+        <text class="sbtn" data-id="{{item.dishId}}" data-delta="1" bindtap="changeQty">＋</text>
+      </view>
+    </view>
+  </view>
+  <view class="field"><view class="label">给厨师的留言</view>
+    <textarea class="ta" placeholder="例如：红烧肉少放糖～" bindinput="onRemark"></textarea></view>
+  <view class="field"><view class="label">用餐时间</view>
+    <input class="input" value="{{mealTime}}" bindinput="onMealTime"></input></view>
+  <view class="tip">🔔 提交后会通知到厨师的「收到的订单」</view>
+  <view class="footbar"><view class="btn-primary sub" bindtap="submit">提交订单 · 共 {{total}} 样</view></view>
+</view>

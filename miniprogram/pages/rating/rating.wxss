@@ -1,0 +1,8 @@
+.wrap { padding:24rpx; }
+.ratecard { padding:32rpx; margin-bottom:28rpx; text-align:center; }
+.rname { font-size:30rpx; font-weight:bold; }
+.bigstars { margin:20rpx 0; }
+.star { font-size:60rpx; color:#e5e7eb; margin:0 8rpx; }
+.star.on { color:#ffb400; }
+.ta { width:100%; box-sizing:border-box; background:#fafbfc; border:1rpx solid #eef0f3; border-radius:16rpx; padding:20rpx; font-size:26rpx; min-height:100rpx; }
+.sub { text-align:center; padding:26rpx; font-size:32rpx; font-weight:bold; }

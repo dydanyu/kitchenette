@@ -1,0 +1,14 @@
+<view class="wrap">
+  <view wx:for="{{orders}}" wx:key="_id" class="card order">
+    <view class="oh">
+      <text class="who">{{item.mealTime}}</text>
+      <text class="pill {{item.status}}">{{item.statusText}}</text>
+    </view>
+    <view wx:for="{{item.items}}" wx:for-item="d" wx:key="dishId" class="oitem">{{d.name}} ×{{d.qty}}</view>
+    <view class="ofoot">
+      <text wx:if="{{item.remark}}">留言：{{item.remark}}</text>
+      <view wx:if="{{item.canRate}}" class="btn-primary rate" data-id="{{item._id}}" bindtap="goRate">去评分</view>
+    </view>
+  </view>
+  <view wx:if="{{orders.length===0}}" class="empty">还没点过菜，去菜单看看吧～</view>
+</view>

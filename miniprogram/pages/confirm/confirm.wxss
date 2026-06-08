@@ -1,0 +1,13 @@
+.wrap { padding:24rpx; padding-bottom:160rpx; }
+.list { padding:16rpx 24rpx; margin-bottom:24rpx; }
+.oitem { display:flex; justify-content:space-between; align-items:center; padding:16rpx 0; font-size:28rpx; }
+.stepper { display:flex; align-items:center; gap:24rpx; }
+.sbtn { width:52rpx; height:52rpx; border:1rpx solid #07c160; color:#07c160; border-radius:50%; text-align:center; line-height:50rpx; }
+.q { font-size:28rpx; font-weight:bold; }
+.field { margin-bottom:24rpx; }
+.label { font-size:26rpx; font-weight:bold; margin-bottom:12rpx; }
+.ta, .input { width:100%; box-sizing:border-box; background:#fff; border-radius:16rpx; padding:20rpx; font-size:26rpx; }
+.ta { min-height:120rpx; }
+.tip { background:#fff8ee; color:#9a6a1a; font-size:24rpx; padding:20rpx; border-radius:16rpx; }
+.footbar { position:fixed; left:0; right:0; bottom:0; padding:20rpx 32rpx; background:#fff; }
+.sub { text-align:center; padding:24rpx; font-size:30rpx; font-weight:bold; }

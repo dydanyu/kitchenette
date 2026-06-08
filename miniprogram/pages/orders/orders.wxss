@@ -1,0 +1,11 @@
+.wrap { padding:24rpx; }
+.order { padding:28rpx; margin-bottom:24rpx; }
+.oh { display:flex; justify-content:space-between; align-items:center; margin-bottom:16rpx; }
+.who { font-size:28rpx; font-weight:bold; }
+.pill { font-size:22rpx; padding:6rpx 18rpx; border-radius:20rpx; }
+.pill.pending { background:#fff1e6; color:#d97706; }
+.pill.served { background:#eafaf0; color:#06ad56; }
+.oitem { font-size:26rpx; color:#374151; padding:6rpx 0; }
+.ofoot { display:flex; justify-content:space-between; align-items:center; margin-top:20rpx; padding-top:20rpx; border-top:1rpx dashed #eef0f3; font-size:24rpx; color:#6b7280; }
+.rate { padding:12rpx 28rpx; font-size:24rpx; }
+.empty { text-align:center; color:#9aa3ad; font-size:26rpx; margin-top:120rpx; }
