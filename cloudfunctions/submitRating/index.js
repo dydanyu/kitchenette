@@ -32,6 +32,7 @@ exports.main = async (event) => {
         orderId,
         dishId: r.dishId,
         userOpenid: OPENID,
+        userName: (order && order.userName) || '家人',
         score: r.score,
         comment: r.comment || '',
         createdAt: Date.now(),

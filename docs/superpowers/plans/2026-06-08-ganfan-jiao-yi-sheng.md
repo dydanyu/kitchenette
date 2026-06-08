@@ -2652,7 +2652,7 @@ git commit -m "feat: add received-orders page with serve action and admin pendin
 4. 在云数据库手动建集合：`dishes / orders / ratings / chefTags / categories / config`。
 5. 权限设置：`dishes/categories/chefTags` 设「所有用户可读」；`orders/ratings` 默认「仅创建者可读写」；若用方案 A 则管理员读取走 `listOrders` 云函数。
 6. 写入管理员白名单：`config` 集合添加文档 `_id="admins"`，`adminOpenids:["你的openid"]`（openid 可在 `getMyContext` 返回或云函数日志里拿到）。
-7. 预置 `categories`：我全都要(前端虚拟)/镇店之宝/无肉不欢/草本养生/干饭时刻/续命靓汤/冰爽开胃（带 sort）。
+7. 预置 `categories`：我全都要(前端虚拟)/镇店之宝/无肉不欢/草本养生/干饭时刻/续命靓汤/醍醐畅饮（带 sort）。
 8. 预置 1-2 个 `chefTags` 和几条 `dishes` 测试数据。
 
 - [ ] **Step 2: 全量回归**

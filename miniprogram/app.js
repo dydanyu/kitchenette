@@ -4,9 +4,10 @@ App({
     cart: {},
     isAdmin: false,
     openid: '',
-    userInfo: null,
+    userName: '',
   },
   onLaunch() {
+    this.globalData.userName = wx.getStorageSync('userName') || '';
     if (!wx.cloud) {
       console.error('请使用 2.2.3 以上基础库');
       return;

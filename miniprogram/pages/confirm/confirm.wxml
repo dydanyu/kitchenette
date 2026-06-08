@@ -9,10 +9,14 @@
       </view>
     </view>
   </view>
+  <view class="field"><view class="label">你的名字</view>
+    <input class="input" value="{{userName}}" bindinput="onName" placeholder="如：小林（评价会署名）"></input></view>
   <view class="field"><view class="label">给厨师的留言</view>
     <textarea class="ta" placeholder="例如：红烧肉少放糖～" bindinput="onRemark"></textarea></view>
   <view class="field"><view class="label">用餐时间</view>
-    <input class="input" value="{{mealTime}}" bindinput="onMealTime"></input></view>
+    <picker mode="time" value="{{mealTime}}" bindchange="onMealTime">
+      <view class="input">🕐 {{mealTime}} ▾</view>
+    </picker></view>
   <view class="tip">🔔 提交后会通知到厨师的「收到的订单」</view>
   <view class="footbar"><view class="btn-primary sub" bindtap="submit">提交订单 · 共 {{total}} 样</view></view>
 </view>

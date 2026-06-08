@@ -1,5 +1,5 @@
 <view wx:if="{{dish}}">
-  <image class="hero" src="{{dish.image}}" mode="aspectFill"></image>
+  <image class="hero" src="{{dish.image}}" mode="widthFix"></image>
   <view class="sheet">
     <view class="h2">{{dish.name}}</view>
     <view class="row"><text class="stars">{{dish.ratingText}}</text> · 已点 {{dish.orderCount||0}} 次</view>

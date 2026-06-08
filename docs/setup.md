@@ -24,9 +24,8 @@
 
 ## 5. 设置集合权限
 
-- `dishes` / `categories` / `chefTags`：**所有用户可读**（家人浏览菜单）。
-- `orders` / `ratings`：默认「**仅创建者可读写**」即可（家人只看自己的）。
-- 管理员读取全部订单走 `listOrders` 云函数（已用管理员校验，云函数内拥有全集合读权限），无需放开 orders 读权限。
+- `dishes` / `categories` / `chefTags` / `ratings`：**所有用户可读**。其中 `ratings` 是「大家的评价」，需公共读，详情页才能展示所有人的评价（数据库公共读免费）。
+- `orders`：默认「**仅创建者可读写**」即可。家人「我的订单」走 `listOrders` 云函数（`mine` 模式按 userOpenid 过滤），管理员看全部也走该云函数。
 
 > 关于图片：**云存储权限保持默认「仅创建者可读写」即可，不用升级套餐去开「所有用户可读」**。家人看图通过 `resolveImages` 云函数：它把图片的 `cloud://` 文件 ID 换成临时 https 链接返回前端，链接谁拿到都能打开，菜单/详情页已自动调用。
 
@@ -50,7 +49,7 @@
 { "name": "草本养生", "emoji": "🥬", "sort": 3 }
 { "name": "干饭时刻", "emoji": "🍚", "sort": 4 }
 { "name": "续命靓汤", "emoji": "🍲", "sort": 5 }
-{ "name": "冰爽开胃", "emoji": "🥗", "sort": 6 }
+{ "name": "醍醐畅饮", "emoji": "🥤", "sort": 6 }
 ```
 
 ## 8. 预置厨师标签与测试菜品
@@ -118,6 +117,6 @@ npx jest
 ### 发布前自检
 
 - 8 个云函数都已「上传并部署」（含 `resolveImages`）。
-- 6 个集合都已创建，`dishes/categories/chefTags` 设为「所有用户可读」。
+- 6 个集合都已创建，`dishes/categories/chefTags/ratings` 设为「所有用户可读」。
 - `config/admins` 白名单里有管理员 openid。
 - 云存储权限保持默认即可（图片靠 `resolveImages` 出临时链接，不需开公共读）。

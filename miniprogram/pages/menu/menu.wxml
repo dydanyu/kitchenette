@@ -1,5 +1,10 @@
 <view class="page">
-  <view class="search">🔍 搜索想吃的菜…</view>
+  <view class="search">
+    <text class="search-icon">🔍</text>
+    <input class="search-input" value="{{keyword}}" placeholder="搜索想吃的菜…"
+           confirm-type="search" bindinput="onSearch" />
+    <text wx:if="{{keyword}}" class="search-clear" catchtap="clearSearch">✕</text>
+  </view>
 
   <view class="split">
     <scroll-view scroll-y class="cats">
@@ -10,10 +15,10 @@
       </view>
     </scroll-view>
 
-    <scroll-view scroll-y class="dishlist">
+    <scroll-view scroll-y class="dishlist {{cartCount>0?'has-cart':''}}">
+      <view wx:if="{{dishes.length===0}}" class="empty">没有找到相关菜品</view>
       <block wx:for="{{dishes}}" wx:key="_id">
-        <view wx:if="{{activeCat==='all' || item.categoryId===activeCat}}"
-              class="drow" data-id="{{item._id}}" bindtap="goDetail">
+        <view class="drow" data-id="{{item._id}}" bindtap="goDetail">
           <image class="dthumb" src="{{item.image}}" mode="aspectFill"></image>
           <view class="dmain">
             <view class="dname">{{item.name}}</view>
@@ -23,7 +28,12 @@
             </view>
             <view class="dbottom">
               <view class="dmeta"><text class="stars">{{item.ratingText}}</text> · 已点 {{item.orderCount||0}}</view>
-              <view class="add" catchtap="addToCart" data-dish="{{item}}">＋</view>
+              <view wx:if="{{cartMap[item._id]}}" class="stepper">
+                <view class="sbtn" catchtap="decQty" data-id="{{item._id}}">−</view>
+                <text class="sqty">{{cartMap[item._id]}}</text>
+                <view class="sbtn on" catchtap="incQty" data-dish="{{item}}">＋</view>
+              </view>
+              <view wx:else class="add" catchtap="addToCart" data-dish="{{item}}">＋</view>
             </view>
           </view>
         </view>

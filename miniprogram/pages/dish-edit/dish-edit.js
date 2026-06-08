@@ -21,16 +21,19 @@ Page({
     const db = wx.cloud.database();
     const categories = (await db.collection('categories').orderBy('sort', 'asc').get()).data;
     const tags = (await db.collection('chefTags').get()).data;
-    let patch = { categories, tags };
+    let selectedTagIds = [];
+    let patch = {};
     if (q.id) {
       const d = (await db.collection('dishes').doc(q.id).get()).data;
       const catIndex = Math.max(0, categories.findIndex((c) => c._id === d.categoryId));
-      patch = { ...patch, dishId: q.id, image: d.image, name: d.name, desc: d.desc,
-        categoryId: d.categoryId, catIndex, selectedTagIds: d.chefTagIds || [], status: d.status };
+      selectedTagIds = d.chefTagIds || [];
+      patch = { dishId: q.id, image: d.image, name: d.name, desc: d.desc,
+        categoryId: d.categoryId, catIndex, status: d.status };
     } else if (categories.length) {
       patch.categoryId = categories[0]._id;
     }
-    this.setData(patch);
+    tags.forEach((t) => { t.selected = selectedTagIds.indexOf(t._id) >= 0; });
+    this.setData({ categories, tags, selectedTagIds, ...patch });
   },
   onName(e) { this.setData({ name: e.detail.value }); },
   onDesc(e) { this.setData({ desc: e.detail.value }); },
@@ -43,7 +46,9 @@ Page({
     const sel = this.data.selectedTagIds.slice();
     const at = sel.indexOf(id);
     at >= 0 ? sel.splice(at, 1) : sel.push(id);
-    this.setData({ selectedTagIds: sel });
+    const tags = this.data.tags.map((t) =>
+      t._id === id ? { ...t, selected: at < 0 } : t);
+    this.setData({ selectedTagIds: sel, tags });
   },
   toggleStatus() { this.setData({ status: this.data.status === 'on' ? 'off' : 'on' }); },
   async chooseImage() {

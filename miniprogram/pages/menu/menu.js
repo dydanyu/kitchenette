@@ -1,19 +1,26 @@
 const app = getApp();
-const { addItem, totalCount } = require("../../utils/cart");
+const { addItem, setQty, totalCount } = require("../../utils/cart");
 const { formatRating } = require("../../utils/format");
 const { call, resolveImages } = require("../../utils/cloud");
 
 Page({
-  data: { categories: [], dishes: [], activeCat: "all", cartCount: 0 },
+  data: { categories: [], dishes: [], activeCat: "all", keyword: "", cartCount: 0, cartMap: {} },
 
   onLoad() {
     this.loadData();
     this.refreshContext();
   },
   onShow() {
-    this.setData({ cartCount: totalCount(app.globalData.cart) });
+    this.syncCart();
     this.syncTabBar();
     this.loadPending();
+  },
+
+  syncCart() {
+    const cart = app.globalData.cart;
+    const cartMap = {};
+    Object.values(cart).forEach((it) => { cartMap[it.dishId] = it.qty; });
+    this.setData({ cartCount: totalCount(cart), cartMap });
   },
   onPullDownRefresh() {
     this.loadData().then(() => wx.stopPullDownRefresh());
@@ -65,21 +72,59 @@ Page({
         .filter(Boolean),
     }));
     await resolveImages(dishes);
+    this.allDishes = dishes;
     this.setData({
       categories: [{ _id: "all", name: "我全都要", emoji: "🍽️" }, ...cats.data],
-      dishes,
     });
+    this.applyFilter();
+  },
+
+  applyFilter() {
+    const kw = this.data.keyword.trim().toLowerCase();
+    const cat = this.data.activeCat;
+    const dishes = (this.allDishes || []).filter((d) => {
+      if (cat !== "all" && d.categoryId !== cat) return false;
+      if (!kw) return true;
+      const hay = [d.name, d.desc, ...(d.chefTagNames || [])]
+        .join(" ").toLowerCase();
+      return hay.indexOf(kw) >= 0;
+    });
+    this.setData({ dishes });
   },
 
   pickCat(e) {
     this.setData({ activeCat: e.currentTarget.dataset.id });
+    this.applyFilter();
+  },
+
+  onSearch(e) {
+    this.setData({ keyword: e.detail.value });
+    this.applyFilter();
+  },
+
+  clearSearch() {
+    this.setData({ keyword: "" });
+    this.applyFilter();
   },
 
   addToCart(e) {
     const dish = e.currentTarget.dataset.dish;
     app.globalData.cart = addItem(app.globalData.cart, dish);
-    this.setData({ cartCount: totalCount(app.globalData.cart) });
-    wx.showToast({ title: "已加入", icon: "none" });
+    this.syncCart();
+  },
+
+  incQty(e) {
+    const dish = e.currentTarget.dataset.dish;
+    app.globalData.cart = addItem(app.globalData.cart, dish);
+    this.syncCart();
+  },
+
+  decQty(e) {
+    const id = e.currentTarget.dataset.id;
+    const cur = app.globalData.cart[id];
+    if (!cur) return;
+    app.globalData.cart = setQty(app.globalData.cart, id, cur.qty - 1);
+    this.syncCart();
   },
 
   goDetail(e) {

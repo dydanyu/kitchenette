@@ -1,12 +1,70 @@
-.wrap { padding:24rpx; padding-bottom:60rpx; }
-.field { margin-bottom:28rpx; }
-.label { font-size:26rpx; font-weight:bold; margin-bottom:12rpx; }
-.uploader { height:200rpx; border:2rpx dashed #cfd6dd; border-radius:20rpx; background:#fafbfc; display:flex; align-items:center; justify-content:center; overflow:hidden; }
-.preview { width:100%; height:100%; }
-.ph { color:#9aa3ad; font-size:26rpx; }
-.input { background:#fff; border-radius:16rpx; padding:22rpx; font-size:26rpx; }
-.ta { width:100%; box-sizing:border-box; background:#fff; border-radius:16rpx; padding:20rpx; font-size:26rpx; min-height:140rpx; }
-.tagpick { display:flex; flex-wrap:wrap; gap:16rpx; }
-.chip { padding:14rpx 24rpx; border-radius:24rpx; background:#fff; color:#6b7280; font-size:24rpx; border:1rpx solid #eef0f3; }
-.chip.on { background:#07c160; color:#fff; border-color:#07c160; }
-.save { text-align:center; padding:26rpx; font-size:32rpx; font-weight:bold; margin-top:20rpx; }
+.wrap {
+  padding: 24rpx;
+  padding-bottom: 60rpx;
+}
+.field {
+  margin-bottom: 28rpx;
+}
+.label {
+  font-size: 26rpx;
+  font-weight: bold;
+  margin-bottom: 12rpx;
+}
+.uploader {
+  height: 320rpx;
+  border: 2rpx dashed #cfd6dd;
+  border-radius: 20rpx;
+  background: #fafbfc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.preview {
+  width: 100%;
+  height: 100%;
+}
+.ph {
+  color: #9aa3ad;
+  font-size: 26rpx;
+}
+.input {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 22rpx;
+  font-size: 26rpx;
+}
+.ta {
+  width: 100%;
+  box-sizing: border-box;
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 20rpx;
+  font-size: 26rpx;
+  height: 170rpx;
+}
+.tagpick {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+}
+.chip {
+  padding: 14rpx 24rpx;
+  border-radius: 24rpx;
+  background: #fff;
+  color: #6b7280;
+  font-size: 24rpx;
+  border: 1rpx solid #eef0f3;
+}
+.chip.on {
+  background: #07c160;
+  color: #fff;
+  border-color: #07c160;
+}
+.save {
+  text-align: center;
+  padding: 26rpx;
+  font-size: 32rpx;
+  font-weight: bold;
+  margin-top: 20rpx;
+}

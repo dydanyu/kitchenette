@@ -17,7 +17,7 @@ Page({
     await resolveImages([dish]);
     const reviews = (await db.collection('ratings').where({ dishId: this.dishId })
       .orderBy('createdAt', 'desc').limit(20).get()).data
-      .map((r) => ({ ...r, starText: starString(r.score), who: '家人' }));
+      .map((r) => ({ ...r, starText: starString(r.score), who: r.userName || '家人' }));
     this.setData({ dish, reviews });
   },
   add() {
