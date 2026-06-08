@@ -18,6 +18,7 @@ Page({
     this.setData({ items: Object.values(cart), total: totalCount(cart) });
   },
   onName(e) { this.setData({ userName: e.detail.value }); },
+  goMenu() { wx.switchTab({ url: '/pages/menu/menu' }); },
   changeQty(e) {
     const { id, delta } = e.currentTarget.dataset;
     const cur = app.globalData.cart[id];

@@ -1,12 +1,19 @@
 <view class="wrap">
   <view class="card list">
-    <view wx:for="{{items}}" wx:key="dishId" class="oitem">
-      <text>{{item.name}}</text>
-      <view class="stepper">
-        <text class="sbtn" data-id="{{item.dishId}}" data-delta="-1" bindtap="changeQty">−</text>
-        <text class="q">{{item.qty}}</text>
-        <text class="sbtn" data-id="{{item.dishId}}" data-delta="1" bindtap="changeQty">＋</text>
+    <block wx:if="{{items.length}}">
+      <view wx:for="{{items}}" wx:key="dishId" class="oitem">
+        <text>{{item.name}}</text>
+        <view class="stepper">
+          <text class="sbtn" data-id="{{item.dishId}}" data-delta="-1" bindtap="changeQty">−</text>
+          <text class="q">{{item.qty}}</text>
+          <text class="sbtn" data-id="{{item.dishId}}" data-delta="1" bindtap="changeQty">＋</text>
+        </view>
       </view>
+    </block>
+    <view wx:else class="oempty">
+      <view class="oempty-emoji">🍽️</view>
+      <view class="oempty-t">清单还是空的</view>
+      <view class="oempty-go" bindtap="goMenu">去菜单选菜</view>
     </view>
   </view>
   <view class="field"><view class="label">你的名字</view>
@@ -18,5 +25,5 @@
       <view class="input">🕐 {{mealTime}} ▾</view>
     </picker></view>
   <view class="tip">🔔 提交后会通知到厨师的「收到的订单」</view>
-  <view class="footbar"><view class="btn-primary sub" bindtap="submit">提交订单 · 共 {{total}} 样</view></view>
+  <view class="footbar"><view class="btn-primary sub {{total===0?'disabled':''}}" bindtap="submit">提交订单 · 共 {{total}} 样</view></view>
 </view>

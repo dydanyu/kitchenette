@@ -12,3 +12,8 @@
 .tip { background:#fff8ee; color:#9a6a1a; font-size:24rpx; padding:20rpx; border-radius:16rpx; }
 .footbar { position:fixed; left:0; right:0; bottom:0; padding:20rpx 32rpx; background:#fff; }
 .sub { text-align:center; padding:24rpx; font-size:30rpx; font-weight:bold; }
+.sub.disabled { background:#e7e9ee; color:#aab0ba; }
+.oempty { text-align:center; padding:48rpx 0 32rpx; }
+.oempty-emoji { font-size:64rpx; }
+.oempty-t { color:#9aa3ad; font-size:26rpx; margin:12rpx 0 24rpx; }
+.oempty-go { display:inline-block; color:#ff5c8a; font-size:26rpx; font-weight:bold; border:1rpx solid #ff5c8a; border-radius:32rpx; padding:12rpx 36rpx; }
